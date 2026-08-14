@@ -304,6 +304,19 @@ export const BASE_PROFILES: Record<string, ModeOpts> = {
     rsPow: 0.6,
     rMin: 0.3
   },
+  synapse: {
+    nodeN: 28,
+    signals: 8,
+    pulseSpeed: 0.48,
+    spin: 0.1,
+    nodeR: 1.15,
+    nodeRDepth: 1.4,
+    rTravel: 1.55,
+    rDepth: 1.1,
+    lineW: 0.7,
+    rsPow: 0.6,
+    rMin: 0.3
+  },
   graph: {
     nodeN: 22,
     edgeN: 5,

@@ -57,6 +57,8 @@ export type PaletteName =
   | 'live'
   | 'iris'
   | 'neon'
+  | 'broadcast'
+  | 'stardust'
   | 'graphite'
   | 'slate'
   | 'paper'
@@ -169,7 +171,10 @@ function hueRamp(lightInk: string, lightFade: string, darkInk: string, darkFade:
 }
 
 const CURATED: Record<
-  Exclude<PaletteName, 'green' | 'mono' | 'twoTone' | 'nebula' | 'callisto' | 'voice' | 'live' | 'iris' | 'neon'>,
+  Exclude<
+    PaletteName,
+    'green' | 'mono' | 'twoTone' | 'nebula' | 'callisto' | 'voice' | 'live' | 'iris' | 'neon' | 'broadcast' | 'stardust'
+  >,
   Palette
 > = {
   graphite: hueRamp('#454a54', '#eaeaeb', '#afb5c0', '#1f2023'),
@@ -266,6 +271,30 @@ export const PALETTES: Record<PaletteName, Palette> = {
     light: [
       { at: 0, hex: '#0e7490' },
       { at: 1, hex: '#f0abfc' }
+    ]
+  },
+  broadcast: {
+    dark: [
+      { at: 0, hex: '#020404' },
+      { at: 0.45, hex: '#00a98a' },
+      { at: 1, hex: '#00e5c0' }
+    ],
+    light: [
+      { at: 0, hex: '#006655' },
+      { at: 1, hex: '#eef3fa' }
+    ]
+  },
+  stardust: {
+    dark: [
+      { at: 0, hex: '#1a2050' },
+      { at: 0.4, hex: '#5f7cff' },
+      { at: 0.72, hex: '#ff5566' },
+      { at: 1, hex: '#ffa23c' }
+    ],
+    light: [
+      { at: 0, hex: '#35459e' },
+      { at: 0.55, hex: '#aac6ff' },
+      { at: 1, hex: '#ffa23c' }
     ]
   },
   ...CURATED

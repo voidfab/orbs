@@ -29,6 +29,8 @@ Several first-drop zips (`main-size`, `engine-canvas-decoupling`, `feat-color-ex
 | https://github.com/alainux/orb | `presence`, `cognition`, `speaking`; palettes `callisto`, `voice` |
 | https://github.com/amunozdev/voiceorbs | skins + palettes `iris`, `neon` |
 | https://github.com/nelay04/Callisto | same voice-orb family as alainux (palette / presence overlap) |
+| zip `akari-master` | `relaying` / synapse electrons (no `repository` field) |
+| zip `bigkijimon-voiceorb-main` | synapse spokes + listen-in / speak-out polarity (no `repository` field) |
 
 ## Vendored hosts (in `ports/`, not the npm tarball)
 
@@ -55,6 +57,8 @@ Several first-drop zips (`main-size`, `engine-canvas-decoupling`, `feat-color-ex
 | https://github.com/Aimer779/codex-voice-orb-study | Demo only: `/aesthetics/codex-voice-orb/` |
 | https://github.com/JairFC/AuraRTC | Demo only: `/aesthetics/aurartc-orb.html` |
 | https://github.com/PabloTheThinker/hermes-desktop-voice-hud | Palette `live` + `/aesthetics/hermes-live.html` |
+| https://github.com/abhi-wan-kenobi/loqui | Skin `stardust` only (not the PWA) |
+| zip `tbpn-voice-orb-main` | Skin `broadcast` (no `repository` field) |
 
 `voice-orb-prototype` (polar ticks skin) had **no repository URL** in the drop. Re-find it from the zip name `voice-orb-prototype-main` if you need to watch it.
 
@@ -62,7 +66,6 @@ Several first-drop zips (`main-size`, `engine-canvas-decoupling`, `feat-color-ex
 
 | Remote | Why skipped |
 |---|---|
-| https://github.com/abhi-wan-kenobi/loqui | Full voice PWA |
 | https://github.com/dburks-svg/lyns-voice | Three.js HUD product |
 
 Other skipped zips (`ada`, `akari`, `axis-agent`, `jarvis-demo`, `Nour`, `ClairVoiceAI`, `tbpn-voice-orb`, `wisp`, `vox-*`, `VoiceX`, `glass-voice-orb-study`, `3d-visualizer`, `audible-visuals`) had no trustworthy `repository` field in the drop. Do not invent remotes.

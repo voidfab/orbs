@@ -54,7 +54,8 @@ export type OrbState =
   | 'responding'
   | 'presence'
   | 'cognition'
-  | 'speaking';
+  | 'speaking'
+  | 'relaying';
 
 /** Any CSS px in 12–256. 20 and 64 remain the official hand-tuned anchors. */
 export type OrbSize = number;

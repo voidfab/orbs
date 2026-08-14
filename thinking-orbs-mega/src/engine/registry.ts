@@ -35,6 +35,7 @@ import {
   frameResponding
 } from './solid-extras';
 import { frameCognition, framePresence, frameSpeaking } from './presence';
+import { frameSynapse } from './synapse';
 import { frameWeb } from './web';
 
 /**
@@ -81,7 +82,8 @@ export const MODE_FRAMES: Record<ModeKey, ModeFrame> = {
   responding: frameResponding,
   field: framePresence,
   cognition: frameCognition,
-  ripple: frameSpeaking
+  ripple: frameSpeaking,
+  synapse: frameSynapse
 };
 
 /** Canvas painters, derived from the geometry. The 2D-canvas binding. */

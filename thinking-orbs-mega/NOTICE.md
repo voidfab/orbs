@@ -31,6 +31,9 @@ These remotes contributed geometry, tunings, or palettes adapted onto the offici
 | https://github.com/alainux/orb | presence / cognition / speaking |
 | https://github.com/amunozdev/voiceorbs | skins, iris / neon |
 | https://github.com/nelay04/Callisto | same voice-orb family |
+| akari / bigkijimon zips | `relaying` (synapse) |
+| https://github.com/abhi-wan-kenobi/loqui | `stardust` skin |
+| tbpn-voice-orb zip | `broadcast` skin |
 
 Several first-drop zips still pointed at Jakub’s remote (size, canvas-decoupling, color-expansion, transitions, cubed). They were branches of upstream, not separate remotes.
 

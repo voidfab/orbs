@@ -12,6 +12,7 @@ Shared vocabulary for the megafork. Official thinking-orbs terms stay as Jakub d
 | **Preset** | Hand-tuned `{speed, count, size}` for a mode at a size. Official tables at 20 and 64; Danko Swift `.large` at 128. |
 | **Contour** | Line-cage family (`variant="contour"`). Not a ModeFrame morph. |
 | **Cube remesh** | `shape="cube"` — the original nine on a cube substrate, not a 10th state. |
+| **Synapse / relaying** | Web + spoke constellation with several electrons riding edges. Not the single-walker `reasoning` graph. |
 
 ## Conversation Seam
 

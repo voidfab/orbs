@@ -9,6 +9,7 @@ Megafork of thinking-orbs **0.3.1** (`e04f3e8`). Not released to npm until expli
 - Official original nine at 20 / 64 remain golden-identical (72 vectors, 1e-4).
 - Any size 12–256; size 128 uses the Danko Swift `.large` table.
 - Fork extras: cube remesh, contour family, pointer spring, extra verbs and palettes. See [FORKS.md](./FORKS.md).
+- `_new/` harvest: `relaying` (synapse electrons), skins `synapse` / `broadcast` / `stardust`, palettes `broadcast` / `stardust`.
 
 ### Conversation Seam (new)
 

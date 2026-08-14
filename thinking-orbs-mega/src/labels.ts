@@ -48,5 +48,6 @@ export const STATE_LABELS: Record<OrbState, string> = {
   responding: 'Responding…',
   presence: 'Here',
   cognition: 'Thinking…',
-  speaking: 'Speaking…'
+  speaking: 'Speaking…',
+  relaying: 'Relaying…'
 };

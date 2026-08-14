@@ -12,7 +12,10 @@ import { ParticlesField } from './skins/ParticlesField';
 import { SKIN_PHASES, type SkinPhase } from './skins/phase';
 import { PolarTicks } from './skins/PolarTicks';
 import { SoftBlob } from './skins/SoftBlob';
+import { Stardust } from './skins/Stardust';
+import { Synapse } from './skins/Synapse';
 import { WaveRing } from './skins/WaveRing';
+import { Broadcast } from './skins/Broadcast';
 
 const CONTOURABLE = new Set<OrbState>([
   'working',
@@ -39,7 +42,8 @@ const EXTRACTED = new Set<OrbState>([
   'responding',
   'presence',
   'cognition',
-  'speaking'
+  'speaking',
+  'relaying'
 ]);
 
 type Tab = 'gallery' | 'skins';
@@ -111,6 +115,8 @@ export function ReviewApp() {
                 <option value="ember">ember</option>
                 <option value="iris">iris</option>
                 <option value="neon">neon</option>
+                <option value="broadcast">broadcast</option>
+                <option value="stardust">stardust</option>
               </select>
             </label>
             <label>
@@ -305,7 +311,10 @@ export function ReviewApp() {
               ['wave ring', 'VoiceOrbs waveform ring', WaveRing],
               ['live glow', 'Hermes / ChatGPT Live sphere + phase rings', LiveGlow],
               ['call pulse', 'AuraRTC aurora particles + expanding rings', CallPulse],
-              ['soft blob', 'Codex-style 2D blob with phase deform', SoftBlob]
+              ['soft blob', 'Codex-style 2D blob with phase deform', SoftBlob],
+              ['synapse', 'Akari / bigkijimon — web + spokes, electrons ride the edges', Synapse],
+              ['broadcast', 'TBPN rings, polar ticks, core bars; thinking is a compute lock', Broadcast],
+              ['stardust', 'Loqui fib shell — cool core, warm lower rim, flecks', Stardust]
             ] as const
           ).map(([title, blurb, Comp]) => (
             <section key={title} className="skin-row">

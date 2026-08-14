@@ -48,7 +48,8 @@ export type ModeKey =
   | 'responding'
   | 'field'
   | 'cognition'
-  | 'ripple';
+  | 'ripple'
+  | 'synapse';
 
 export const ORIGINAL_STATES = [
   'working',
@@ -110,7 +111,8 @@ export const STATE_TO_MODE: Record<OrbState, ModeKey> = {
   responding: 'responding',
   presence: 'field',
   cognition: 'cognition',
-  speaking: 'ripple'
+  speaking: 'ripple',
+  relaying: 'synapse'
 };
 
 export const PROGRESS_MODES: ReadonlySet<ModeKey> = new Set([
@@ -403,6 +405,10 @@ const EXTRA: Partial<Record<OrbState, { a20: Preset; a64: Preset; cycle?: number
   speaking: {
     a64: { speed: 1.35, count: 1, size: 1, extra: { dotN: 160 } },
     a20: { speed: 1.5, count: 0.3, size: 1.55, extra: { dotN: 48 } }
+  },
+  relaying: {
+    a64: { speed: 1.15, count: 1, size: 1, extra: { nodeN: 28, signals: 8 } },
+    a20: { speed: 1.25, count: 0.45, size: 1.55, extra: { nodeN: 14, signals: 4 } }
   }
 };
 

@@ -50,21 +50,22 @@ Svelte now rebinds to the megafork `ModeFrame` engine (plus `color`, `static`, `
 
 ## Fourth drop (last aesthetic apps + two extra visualizers)
 
-Later drops still under review live in `_new/` (gitignored, not published).
+Later drops live in `_new/` (gitignored, not published). Harvest pass finished.
 
 | Artifact | Verdict | What landed |
 |---|---|---|
 | `voiceorbs` | **EXTRACT** skins + palettes | `particles` field, `wave ring`; palettes `iris` / `neon` |
 | `voice-orb-prototype` | **EXTRACT** skin | `polar ticks` + thinking mini-orbits. Skip ribbon wings / product chrome |
 | `glass-voice-orb-study` | **SKIP** engine | WebGL glass. 2D stand-in is `soft blob` |
-| `tbpn-voice-orb` | **SKIP** | CSS/DOM + T logo |
+| `tbpn-voice-orb` | **EXTRACT** skin | `broadcast` — 3 rings, 18 polar ticks, 16 core bars. Skip T-logo / CSS glow |
 | `wisp` | **SKIP** | Swift GPT-Live clone |
-| `akari` | **SKIP** | Product `orb.ts` |
+| `akari` | **EXTRACT** geometry | `relaying` / `synapse` — proximity web + traveling electrons |
+| `bigkijimon-voiceorb` | **SKIP** product; **EXTRACT** | Same synapse family: spokes + listen-in / speak-out polarity (in the synapse skin). WebGL blob skipped |
 | `jarvis-demo` | **SKIP** | WebGL ferrofluid variants A–D |
 | `Nour` / `ClairVoiceAI` | **SKIP** | Full products / Three.js glass |
 | `3d-visualizer` / `audible-visuals` | **SKIP** | Old Three.js audio visualizers |
 
-Skins tab shows **idle / listening / thinking / speaking** for each: particles, polar ticks, wave ring, live glow, call pulse, soft blob.
+Skins tab shows **idle / listening / thinking / speaking** for each: particles, polar ticks, wave ring, live glow, call pulse, soft blob, synapse, broadcast, stardust.
 
 ## Third drop (more aesthetic / voice products)
 
@@ -78,7 +79,7 @@ Policy: extract only dotted 2D ideas that fit `ModeFrame`. Skip WebGL, Three.js,
 | `hermes-desktop-voice-hud` | Canvas 2D glow | **SKIP** engine; **EXTRACT** palette | Soft white→periwinkle sphere. Palette `live`. Play at `/aesthetics/hermes-live.html` |
 | `ada` | Zig + sokol shader | **SKIP** | Desktop avatar product, fragment-shader orb |
 | `axis-agent` | Three.js + MediaPipe | **SKIP** | Holographic wireframe product, bloom/CA |
-| `loqui` | Three.js Mesh/Stardust | **SKIP** | Full voice PWA. Stardust ≈ `presence` |
+| `loqui` | Three.js Mesh/Stardust | **SKIP** product; **EXTRACT** skin | `stardust` — fib shell, warm lower rim, flecks. Skip Mesh / PWA |
 | `lyns-voice` | Three.js HUD | **SKIP** | Oracle avatar product. Themes already covered (`aurora` / `ember`) |
 | `vox-voice-assistant` / `vox-assistant-enhanced` | OGL / R3F liquid glass | **SKIP** | Shader iridescence + ferrofluid, not dotted |
 
