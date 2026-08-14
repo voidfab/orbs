@@ -3652,8 +3652,22 @@ const ID = "thinking-orbs";
 const VOICE_BUS = "hermes:voice-bus";
 const $state = atom("idle");
 const $preview = atom("");
+const bySession = /* @__PURE__ */ new Map();
 function currentState() {
   return $preview.get() || $state.get();
+}
+function eventIds(event, payload) {
+  const ids = [event.session_id, payload.session_id, payload.stored_session_id];
+  return ids.filter((id) => typeof id === "string" && id.length > 0);
+}
+function showFor(sid, next) {
+  if (sid) bySession.set(sid, next);
+  const active = host.state.activeSessionId.get();
+  if (!active || !sid || sid === active) $state.set(next);
+}
+function showActive() {
+  const active = host.state.activeSessionId.get();
+  $state.set(active && bySession.get(active) || "idle");
 }
 function isDark() {
   var _a, _b;
@@ -3735,36 +3749,43 @@ function StatusChip() {
 function applyEvent(event) {
   if (!event || typeof event !== "object") return;
   const type = String(event.type || "");
-  const payload = event.payload && typeof event.payload === "object" ? event.payload : event;
-  const sid = event.session_id || payload.session_id;
+  if (type === "thinking.delta") return;
+  const payload = event.payload && typeof event.payload === "object" ? event.payload : {};
+  const ids = eventIds(event, payload);
   const active = host.state.activeSessionId.get();
-  if (sid && active && sid !== active) return;
+  const sid = ids[0] || active || "";
+  const forActive = !ids.length || active && ids.includes(active);
+  if (type === "session.info" && typeof payload.running === "boolean") {
+    showFor(sid, payload.running ? bySession.get(sid) || "thinking" : "idle");
+    return;
+  }
   if (type === "message.start") {
-    $state.set("thinking");
+    showFor(sid, "thinking");
     return;
   }
-  if (type === "message.delta") {
-    $state.set("composing");
+  if (type === "message.delta" || type === "message.interim") {
+    if (forActive || sid) showFor(sid, "composing");
     return;
   }
-  if (type === "message.complete" || type === "agent.settled" || type === "session.idle") {
-    $state.set("idle");
+  if (type === "message.complete" || type === "error") {
+    showFor(sid, "idle");
     return;
   }
-  if (type.includes("tool") && (type.includes("start") || type.includes("begin"))) {
-    $state.set(classifyTool(payload.toolName || payload.name || payload.tool));
+  if (type === "tool.start" || type === "tool.generating") {
+    showFor(sid, classifyTool(payload.toolName || payload.name || payload.tool || payload.tool_name));
     return;
   }
-  if (type.includes("tool") && (type.includes("end") || type.includes("complete") || type.includes("finish"))) {
-    $state.set("thinking");
+  if (type === "tool.complete") {
+    showFor(sid, "thinking");
   }
 }
 function onVoiceBus(event) {
   const detail = (event == null ? void 0 : event.detail) && typeof event.detail === "object" ? event.detail : {};
   const phase = String(detail.phase || detail.state || "");
   if (!phase) return;
+  const active = host.state.activeSessionId.get();
   $preview.set("");
-  $state.set(phaseToOrbState(phase, detail.toolName));
+  showFor(active || "", phaseToOrbState(phase, detail.toolName));
 }
 const plugin = {
   id: ID,
@@ -3772,6 +3793,9 @@ const plugin = {
   defaultEnabled: true,
   register(ctx) {
     const offGw = host.onEvent("*", applyEvent);
+    const sidAtom = host.state.activeSessionId;
+    const offSid = typeof sidAtom.subscribe === "function" ? sidAtom.subscribe(() => showActive()) : typeof sidAtom.listen === "function" ? sidAtom.listen(() => showActive()) : null;
+    showActive();
     if (typeof window !== "undefined") {
       window.addEventListener(VOICE_BUS, onVoiceBus);
     }
@@ -3843,6 +3867,10 @@ const plugin = {
     return () => {
       try {
         offGw == null ? void 0 : offGw();
+      } catch {
+      }
+      try {
+        offSid == null ? void 0 : offSid();
       } catch {
       }
       if (typeof window !== "undefined") {
