@@ -1,10 +1,10 @@
 name: Deploy demo to GitHub Pages
 
-# Redeploys the demo whenever main changes.
+# Redeploys the demo whenever master changes.
 
 on:
   push:
-    branches: [main]
+    branches: [master]
     paths:
       - 'demo/**'
       - 'src/**'
