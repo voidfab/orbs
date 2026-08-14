@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AuraRTC orb styles — review</title>
+  <style>
+    :root { color-scheme: dark; }
+    html, body { margin: 0; min-height: 100%; background: #07080a; color: #e8e8e8; font: 14px/1.4 ui-sans-serif, system-ui, sans-serif; }
+    canvas { position: fixed; inset: 0; width: 100vw; height: 100vh; display: block; }
+    .bar {
+      position: fixed; left: 16px; right: 16px; top: 16px;
+      display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center;
+      background: rgba(12,14,18,.72); border: 1px solid #2a2f38; border-radius: 12px;
+      padding: 10px 14px; backdrop-filter: blur(10px);
+    }
+    h1 { font-size: 14px; font-weight: 600; margin: 0 8px 0 0; }
+    button, select { background: #1a1f27; color: inherit; border: 1px solid #333; border-radius: 8px; padding: 6px 10px; font: inherit; }
+    button.on { outline: 2px solid #7bf; }
+    .muted { color: #8a919c; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="bar">
+    <h1>AuraRTC styles</h1>
+    <label class="muted">style
+      <select id="style">
+        <option value="pulse" selected>pulse (rings)</option>
+        <option value="aurora">aurora (particles)</option>
+        <option value="minimal">minimal</option>
+      </select>
+    </label>
+    <button id="user" type="button">you speak</button>
+    <button id="remote" type="button">remote speak</button>
+    <button id="both" type="button">both</button>
+    <button id="idle" type="button" class="on">idle</button>
+    <button id="drop" type="button">disconnected</button>
+    <span class="muted">Canvas 2D product skin — not extracted into the dotted engine. Pulse ≈ megafork <code>waiting</code>.</span>
+    <a class="muted" href="/play.html">back to hub</a>
+  </div>
+  <canvas id="orbCanvas"></canvas>
+  <script src="./aurartc-orb.js"></script>
+</body>
+</html>

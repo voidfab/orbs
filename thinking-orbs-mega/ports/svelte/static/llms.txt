@@ -1,0 +1,24 @@
+# svelte-thinking-orbs
+
+> Dotted thought-orb indicators for AI and agent UIs in Svelte 5, with nine tuned states and theme-aware rendering.
+
+Install with `npm install svelte-thinking-orbs`, `pnpm add svelte-thinking-orbs`, `yarn add svelte-thinking-orbs`, or `bun add svelte-thinking-orbs`. Import `ThinkingOrb` and render it wherever an interface needs a visual thinking or processing state.
+
+```svelte
+<script lang="ts">
+	import { ThinkingOrb } from "svelte-thinking-orbs";
+</script>
+
+<ThinkingOrb state="composing" size={48} />
+```
+
+## Documentation
+
+- [Website](https://svelte-thinking-orbs.alexisgvrcia.dev/): Product overview, examples, and interactive playground.
+- [LLM guide](https://raw.githubusercontent.com/alexisgvrcia/svelte-thinking-orbs/main/LLM.md): Concise API reference and code-generation guidance.
+- [npm package](https://www.npmjs.com/package/svelte-thinking-orbs): Published package and versions.
+
+## Source
+
+- [Repository](https://github.com/alexisgvrcia/svelte-thinking-orbs): Source code, issues, and release history.
+- [License](https://github.com/alexisgvrcia/svelte-thinking-orbs/blob/main/LICENSE): MIT.

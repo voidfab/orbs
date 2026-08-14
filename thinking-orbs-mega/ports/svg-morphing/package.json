@@ -1,0 +1,69 @@
+{
+  "name": "morphing-orbs",
+  "version": "0.2.1",
+  "description": "The thinking-orbs animations on SVG — crisp at any size, zoom, and DPR, with smooth morph transitions between states",
+  "author": "Rob Shelnutt",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rshelnutt/morphing-orbs.git"
+  },
+  "homepage": "https://rshelnutt.github.io/morphing-orbs/",
+  "keywords": [
+    "react",
+    "svg",
+    "loading",
+    "spinner",
+    "ai",
+    "agent",
+    "thinking",
+    "orb",
+    "morph"
+  ],
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "demo:dev": "vite",
+    "demo:build": "vite build"
+  },
+  "dependencies": {
+    "thinking-orbs": "^0.2.0"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.6.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tsup": "^8.5.0",
+    "typescript": "^5.9.2",
+    "vite": "^7.0.0",
+    "vitest": "^3.2.0"
+  }
+}

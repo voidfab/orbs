@@ -1,0 +1,10 @@
+# Later drops still being reviewed. Not part of the megafork tree.
+_new/
+
+# Local / machine junk
+.DS_Store
+**/.DS_Store
+*.log
+
+# Local task memory — not part of the published tree
+.memento/

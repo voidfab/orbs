@@ -1,0 +1,47 @@
+[package]
+name = "gpui-thinking-orbs"
+version = "0.1.0"
+edition = "2021"
+description = "Dotted thought-orb loading indicators for AI & agent UIs — GPUI port of thinking-orbs"
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/FrancoEscob/gpui-thinking-orbs"
+homepage = "https://github.com/FrancoEscob/gpui-thinking-orbs"
+documentation = "https://docs.rs/gpui-thinking-orbs"
+keywords = ["gpui", "ui", "animation", "ai", "orb"]
+categories = ["gui"]
+# `cx.spawn(async move |this, cx| ...)` needs async closures (Rust 2024 / 1.85).
+rust-version = "1.85"
+authors = ["Franco Escobar <francoescobarvrx@gmail.com>"]
+exclude = [
+    "assets/",
+    "docs/",
+    "scripts/",
+    ".github/",
+    ".claude/",
+    ".grok/",
+    "target/",
+]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[dependencies]
+gpui = "0.2.2"
+
+[[example]]
+name = "playground"
+path = "examples/playground.rs"
+doc-scrape-examples = true
+
+[[example]]
+name = "stress"
+path = "examples/stress.rs"
+
+[[example]]
+name = "readme_usage"
+path = "examples/readme_usage.rs"
+
+[profile.dev]
+opt-level = 1

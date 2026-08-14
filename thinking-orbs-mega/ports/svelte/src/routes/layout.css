@@ -1,0 +1,190 @@
+@import "tailwindcss";
+@import "@fontsource-variable/geist/wght.css";
+
+@theme inline {
+	--color-background: #070707;
+	--color-foreground: #f4f4f4;
+	--color-card: #121212;
+	--color-border: #282828;
+	--color-muted: #8a8a8a;
+}
+
+:root {
+	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+	--icon-swap-dur: 200ms;
+	--icon-swap-ease: var(--ease-out);
+	--icon-swap-blur: 4px;
+	--icon-swap-start-scale: 0.25;
+	--shimmer-dur: 2000ms;
+	--shimmer-band: 400%;
+	--shimmer-base: rgba(251, 251, 251, 0.5);
+	--shimmer-highlight: #ffffff;
+	--sh-class: #f4f4f4;
+	--sh-identifier: #d4d4d4;
+	--sh-sign: #737373;
+	--sh-property: #d4d4d4;
+	--sh-entity: #f4f4f4;
+	--sh-jsxliterals: #d4d4d4;
+	--sh-string: #a3a3a3;
+	--sh-keyword: #f4f4f4;
+	--sh-comment: #737373;
+}
+
+@layer base {
+	html {
+		scroll-behavior: smooth;
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		-webkit-text-size-adjust: 100%;
+		-webkit-tap-highlight-color: transparent;
+	}
+
+	body {
+		font-family: "Geist Variable", sans-serif;
+		background-color: var(--color-background);
+		color: var(--color-foreground);
+	}
+
+	h1,
+	h2,
+	h3 {
+		text-wrap: balance;
+	}
+
+	p,
+	li,
+	dd {
+		text-wrap: pretty;
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--color-foreground);
+		outline-offset: 3px;
+	}
+
+	::selection {
+		background-color: var(--color-foreground);
+		color: var(--color-background);
+	}
+}
+
+.hero-orb,
+.hero-copy,
+.landing-section,
+.landing-footer {
+	animation: landing-in 260ms var(--ease-out) both;
+}
+
+.hero-copy {
+	animation-delay: 35ms;
+}
+
+.landing-install {
+	animation-delay: 45ms;
+}
+
+.landing-usage {
+	animation-delay: 90ms;
+}
+
+.landing-examples {
+	animation-delay: 135ms;
+}
+
+.landing-playground {
+	animation-delay: 180ms;
+}
+
+.landing-reference {
+	animation-delay: 225ms;
+}
+
+.landing-footer {
+	animation-delay: 270ms;
+}
+
+@keyframes landing-in {
+	from {
+		opacity: 0;
+		transform: translateY(0.25rem);
+	}
+}
+
+.t-icon {
+	grid-area: 1 / 1;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	transition:
+		opacity var(--icon-swap-dur) var(--icon-swap-ease),
+		filter var(--icon-swap-dur) var(--icon-swap-ease),
+		transform var(--icon-swap-dur) var(--icon-swap-ease);
+}
+
+[data-state="a"] .t-icon[data-icon="a"],
+[data-state="b"] .t-icon[data-icon="b"] {
+	opacity: 1;
+	filter: blur(0);
+	transform: scale(1);
+}
+
+[data-state="a"] .t-icon[data-icon="b"],
+[data-state="b"] .t-icon[data-icon="a"] {
+	opacity: 0;
+	filter: blur(var(--icon-swap-blur));
+	transform: scale(var(--icon-swap-start-scale));
+}
+
+.t-shimmer {
+	position: relative;
+	display: inline-block;
+	color: var(--shimmer-base);
+}
+
+.t-shimmer::before {
+	position: absolute;
+	inset: 0;
+	pointer-events: none;
+	content: attr(data-text);
+	background-image: linear-gradient(
+		90deg,
+		transparent 0%,
+		transparent 40%,
+		var(--shimmer-highlight) 50%,
+		transparent 60%,
+		transparent 100%
+	);
+	background-repeat: no-repeat;
+	background-position: 100% 0;
+	background-size: var(--shimmer-band) 100%;
+	background-clip: text;
+	color: transparent;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	animation: t-shimmer var(--shimmer-dur) linear infinite;
+}
+
+@keyframes t-shimmer {
+	to {
+		background-position: 0 0;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	.hero-orb,
+	.hero-copy,
+	.landing-section,
+	.landing-footer,
+	.t-shimmer::before {
+		animation: none;
+	}
+
+	.t-icon {
+		transition: none;
+	}
+}

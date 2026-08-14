@@ -1,0 +1,483 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4B9CD14FFD2CF942F80BC939 /* OrbMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9EC6BAC80523933108504A /* OrbMetadata.swift */; };
+		50553728434162359A425678 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86658E4DB1823942B3B45A25 /* ContentView.swift */; };
+		960D6A77F3A1F5581EA61821 /* ThinkingOrbsDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F74782D8AFF947D3F743E62 /* ThinkingOrbsDemoApp.swift */; };
+		AE8C01A7D587C3D8E875B568 /* ThinkingOrbs in Frameworks */ = {isa = PBXBuildFile; productRef = B8CEFA6DAE5F71FD47EAD953 /* ThinkingOrbs */; };
+		B803A3D030A1A9CA5C93A05F /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 6841D896EA38ADF521CB6C72 /* PrivacyInfo.xcprivacy */; };
+		DEC421BE0D19CDC5A6D90FFF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1D31E633558E2B3145431319 /* Assets.xcassets */; };
+		FCA9C7A4484A97C6B64A20D4 /* ThinkingOrbsDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7A8A2FA397B3D1688532FE /* ThinkingOrbsDemoUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E48E25D5DF95DBAD249AB278 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 56BB29B414E543E8D795C597 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6FFAE723733B6AA863916D06;
+			remoteInfo = ThinkingOrbsDemo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1D31E633558E2B3145431319 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2C9EC6BAC80523933108504A /* OrbMetadata.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrbMetadata.swift; sourceTree = "<group>"; };
+		6841D896EA38ADF521CB6C72 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		7D705E56073347135C168C02 /* ThinkingOrbsDemo.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ThinkingOrbsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		86658E4DB1823942B3B45A25 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		8F74782D8AFF947D3F743E62 /* ThinkingOrbsDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThinkingOrbsDemoApp.swift; sourceTree = "<group>"; };
+		AA8678C3D66C0DF3737DE130 /* ThinkingOrbsDemoUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = ThinkingOrbsDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC7A8A2FA397B3D1688532FE /* ThinkingOrbsDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThinkingOrbsDemoUITests.swift; sourceTree = "<group>"; };
+		DFB28094DD8652CB5538C3D4 /* publish-thinking-orbs */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "publish-thinking-orbs"; path = ..; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6F87D1EC38E6419CA0E57E53 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AE8C01A7D587C3D8E875B568 /* ThinkingOrbs in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8C42D6FA0732ED755C1CC988 = {
+			isa = PBXGroup;
+			children = (
+				F56DA08E368ED7C3C0BB0EFD /* Packages */,
+				D6A4E1D47AE7333D0E01B6A1 /* ThinkingOrbsDemo */,
+				9A484614D481110B8477DF68 /* ThinkingOrbsDemoUITests */,
+				9E5173B66620A5D8951B17B8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9A484614D481110B8477DF68 /* ThinkingOrbsDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BC7A8A2FA397B3D1688532FE /* ThinkingOrbsDemoUITests.swift */,
+			);
+			path = ThinkingOrbsDemoUITests;
+			sourceTree = "<group>";
+		};
+		9E5173B66620A5D8951B17B8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7D705E56073347135C168C02 /* ThinkingOrbsDemo.app */,
+				AA8678C3D66C0DF3737DE130 /* ThinkingOrbsDemoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D6A4E1D47AE7333D0E01B6A1 /* ThinkingOrbsDemo */ = {
+			isa = PBXGroup;
+			children = (
+				1D31E633558E2B3145431319 /* Assets.xcassets */,
+				86658E4DB1823942B3B45A25 /* ContentView.swift */,
+				2C9EC6BAC80523933108504A /* OrbMetadata.swift */,
+				6841D896EA38ADF521CB6C72 /* PrivacyInfo.xcprivacy */,
+				8F74782D8AFF947D3F743E62 /* ThinkingOrbsDemoApp.swift */,
+			);
+			path = ThinkingOrbsDemo;
+			sourceTree = "<group>";
+		};
+		F56DA08E368ED7C3C0BB0EFD /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				DFB28094DD8652CB5538C3D4 /* publish-thinking-orbs */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6FFAE723733B6AA863916D06 /* ThinkingOrbsDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 63892647C9AF5F6CB43B6570 /* Build configuration list for PBXNativeTarget "ThinkingOrbsDemo" */;
+			buildPhases = (
+				0F889F5A967699BA01CCAEA0 /* Sources */,
+				32905BA95C030ADADCF579D8 /* Resources */,
+				6F87D1EC38E6419CA0E57E53 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ThinkingOrbsDemo;
+			packageProductDependencies = (
+				B8CEFA6DAE5F71FD47EAD953 /* ThinkingOrbs */,
+			);
+			productName = ThinkingOrbsDemo;
+			productReference = 7D705E56073347135C168C02 /* ThinkingOrbsDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8FDC40098B4197BE9156E303 /* ThinkingOrbsDemoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C6FD8E54C980BAB4251F31F3 /* Build configuration list for PBXNativeTarget "ThinkingOrbsDemoUITests" */;
+			buildPhases = (
+				2331D4E6C4E0CA3E2A9512A8 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18528A8E73A38A4BDF5B3001 /* PBXTargetDependency */,
+			);
+			name = ThinkingOrbsDemoUITests;
+			packageProductDependencies = (
+			);
+			productName = ThinkingOrbsDemoUITests;
+			productReference = AA8678C3D66C0DF3737DE130 /* ThinkingOrbsDemoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		56BB29B414E543E8D795C597 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					6FFAE723733B6AA863916D06 = {
+						ProvisioningStyle = Automatic;
+					};
+					8FDC40098B4197BE9156E303 = {
+						TestTargetID = 6FFAE723733B6AA863916D06;
+					};
+				};
+			};
+			buildConfigurationList = C125FA216545543D2AC2A551 /* Build configuration list for PBXProject "ThinkingOrbsDemo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 8C42D6FA0732ED755C1CC988;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				B29C63EB9F94D73A4B0AFF3C /* XCLocalSwiftPackageReference ".." */,
+			);
+			preferredProjectObjectVersion = 77;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6FFAE723733B6AA863916D06 /* ThinkingOrbsDemo */,
+				8FDC40098B4197BE9156E303 /* ThinkingOrbsDemoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		32905BA95C030ADADCF579D8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEC421BE0D19CDC5A6D90FFF /* Assets.xcassets in Resources */,
+				B803A3D030A1A9CA5C93A05F /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0F889F5A967699BA01CCAEA0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50553728434162359A425678 /* ContentView.swift in Sources */,
+				4B9CD14FFD2CF942F80BC939 /* OrbMetadata.swift in Sources */,
+				960D6A77F3A1F5581EA61821 /* ThinkingOrbsDemoApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2331D4E6C4E0CA3E2A9512A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FCA9C7A4484A97C6B64A20D4 /* ThinkingOrbsDemoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		18528A8E73A38A4BDF5B3001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6FFAE723733B6AA863916D06 /* ThinkingOrbsDemo */;
+			targetProxy = E48E25D5DF95DBAD249AB278 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		21F4AA53E4310B08F028CA19 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		22ECE05256FEC31C2EF3E19A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.michaelwdanko.ThinkingOrbsDemoUITests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = ThinkingOrbsDemo;
+			};
+			name = Release;
+		};
+		4BB7874A3E25E51654F7E6FB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Thinking Orbs";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michaelwdanko.ThinkingOrbsDemo;
+				PRODUCT_MODULE_NAME = ThinkingOrbsApp;
+				PRODUCT_NAME = "Thinking Orbs";
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		B17BEFC7E88B797EF6810C00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		BE43ED7637237228BAC3D087 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Thinking Orbs";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michaelwdanko.ThinkingOrbsDemo;
+				PRODUCT_MODULE_NAME = ThinkingOrbsApp;
+				PRODUCT_NAME = "Thinking Orbs";
+				SDKROOT = iphoneos;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		DEB8AB824F6817588C7E92A9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.michaelwdanko.ThinkingOrbsDemoUITests;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_TARGET_NAME = ThinkingOrbsDemo;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		63892647C9AF5F6CB43B6570 /* Build configuration list for PBXNativeTarget "ThinkingOrbsDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4BB7874A3E25E51654F7E6FB /* Debug */,
+				BE43ED7637237228BAC3D087 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C125FA216545543D2AC2A551 /* Build configuration list for PBXProject "ThinkingOrbsDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				21F4AA53E4310B08F028CA19 /* Debug */,
+				B17BEFC7E88B797EF6810C00 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C6FD8E54C980BAB4251F31F3 /* Build configuration list for PBXNativeTarget "ThinkingOrbsDemoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEB8AB824F6817588C7E92A9 /* Debug */,
+				22ECE05256FEC31C2EF3E19A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		B29C63EB9F94D73A4B0AFF3C /* XCLocalSwiftPackageReference ".." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B8CEFA6DAE5F71FD47EAD953 /* ThinkingOrbs */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ThinkingOrbs;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 56BB29B414E543E8D795C597 /* Project object */;
+}

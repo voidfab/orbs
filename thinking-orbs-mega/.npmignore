@@ -1,0 +1,13 @@
+# Safety net. package.json "files" is the real allow-list (dist + docs).
+node_modules
+ports
+demo
+scripts
+spec
+src
+*.config.ts
+*.config.js
+tsconfig*.json
+biome.json
+dist-demo
+.DS_Store

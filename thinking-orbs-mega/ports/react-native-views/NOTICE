@@ -1,0 +1,11 @@
+react-native-thinking-orbs
+
+The animation engine is adapted from thinking-orbs:
+https://github.com/Jakubantalik/thinking-orbs
+
+Original authors:
+Jakub Antalik
+Alex Brinza
+
+The original work is licensed under the MIT License. Its copyright and license
+notice are preserved in LICENSE.

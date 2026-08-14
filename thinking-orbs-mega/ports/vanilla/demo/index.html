@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Framework-free thinking orbs for AI-driven interfaces"
+    />
+    <title>Thinking Orbs — Vanilla JavaScript</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div>
+        <h1>Thinking orbs</h1>
+        <p class="lede">
+          Framework-free status animations for AI and agent interfaces.
+        </p>
+      </div>
+
+      <button id="theme-toggle" class="theme-toggle" type="button">
+        Switch to light
+      </button>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="playground-title">
+        <div class="featured-orb">
+          <thinking-orb
+            id="featured-orb"
+            state="composing"
+            size="128"
+            interactive
+          ></thinking-orb>
+          <strong
+            id="featured-label"
+            class="state-label is-shimmering"
+            data-text="Composing…"
+          >Composing…</strong>
+        </div>
+
+        <div class="controls">
+          <div>
+            <h2 id="playground-title">Playground</h2>
+            <p>Choose an activity, then hover or drag across the orb.</p>
+          </div>
+
+          <fieldset>
+            <legend>State</legend>
+            <div id="state-controls" class="button-group"></div>
+          </fieldset>
+
+          <label class="speed-control">
+            <span>Speed <output id="speed-output">1.00×</output></span>
+            <input
+              id="speed"
+              type="range"
+              min="0.25"
+              max="2"
+              step="0.05"
+              value="1"
+            />
+          </label>
+
+          <button id="pause-toggle" class="secondary-button" type="button">
+            Pause animation
+          </button>
+        </div>
+      </section>
+
+      <section class="states" aria-labelledby="states-title">
+        <div class="section-heading">
+          <h2 id="states-title">Nine AI activity states</h2>
+          <p>Each state has distinct motion at avatar and inline sizes.</p>
+        </div>
+
+        <div id="state-grid" class="state-grid"></div>
+      </section>
+
+      <section class="variant-showcase" aria-labelledby="variants-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Optional style</p>
+            <h2 id="variants-title">Nine contour alternatives</h2>
+          </div>
+          <p>Every original state has a motion-matched line alternative.</p>
+        </div>
+
+        <div id="variant-grid" class="state-grid variant-grid"></div>
+      </section>
+
+      <section class="usage" aria-labelledby="usage-title">
+        <div>
+          <p class="eyebrow">Use anywhere</p>
+          <h2 id="usage-title">One standards-based element</h2>
+        </div>
+        <div class="code-panel">
+          <div class="code-panel-header" aria-hidden="true">
+            <span class="code-panel-dots">
+              <i></i>
+              <i></i>
+              <i></i>
+            </span>
+            <span>HTML</span>
+          </div>
+          <pre><code>&lt;thinking-orb
+  state="searching"
+  size="128"
+  theme="auto"
+  interactive
+&gt;&lt;/thinking-orb&gt;</code></pre>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>Adapted from thinking-orbs by Jakub Antalik under the MIT License.</p>
+      <a
+        class="repo-link"
+        href="https://github.com/Schoolees/thinking-orbs"
+        target="_blank"
+        rel="noreferrer"
+        aria-label="View @schoolees/thinking-orbs on GitHub"
+      >
+        <svg
+          aria-hidden="true"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="M10.226 17.284c-2.965-.36-5.054-2.493-5.054-5.256 0-1.123.404-2.336 1.078-3.144-.292-.741-.247-2.314.09-2.965.898-.112 2.111.36 2.83 1.01.853-.269 1.752-.404 2.853-.404 1.1 0 1.999.135 2.807.382.696-.629 1.932-1.1 2.83-.988.315.606.36 2.179.067 2.942.72.854 1.101 2 1.101 3.167 0 2.763-2.089 4.852-5.098 5.234.763.494 1.28 1.572 1.28 2.807v2.336c0 .674.561 1.056 1.235.786 4.066-1.55 7.255-5.615 7.255-10.646C23.5 6.188 18.334 1 11.978 1 5.62 1 .5 6.188.5 12.545c0 4.986 3.167 9.12 7.435 10.669.606.225 1.19-.18 1.19-.786V20.63a2.9 2.9 0 0 1-1.078.224c-1.483 0-2.359-.808-2.987-2.313-.247-.607-.517-.966-1.034-1.033-.27-.023-.359-.135-.359-.27 0-.27.45-.471.898-.471.652 0 1.213.404 1.797 1.235.45.651.921.943 1.483.943.561 0 .92-.202 1.437-.719.382-.381.674-.718.944-.943"/>
+        </svg>
+        <span>@schoolees/thinking-orbs</span>
+      </a>
+    </footer>
+
+    <script type="module" src="/main.ts"></script>
+  </body>
+</html>

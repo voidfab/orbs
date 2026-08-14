@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Codex Voice Orb · Versioned Study</title>
+  <meta name="description" content="A zero-dependency WebGL study of an audio-reactive voice orb.">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <header class="hero">
+      <p class="eyebrow">CODEX VOICE ORB · VERSIONED STUDY</p>
+      <h1>声音变成一颗会呼吸的圆球</h1>
+      <p class="hero-copy">
+        根据 Codex Voice 的可见行为整理的独立研究实现：
+        WebGL 实时绘制，输出音频频谱驱动形变，并保留确定性预览和 Canvas 2D 降级。
+      </p>
+      <div class="hero-meta">
+        <span>WebGL 1</span>
+        <span>FFT 2048</span>
+        <span>30Hz analysis</span>
+        <span>DPR ≤ 1.5</span>
+      </div>
+    </header>
+
+    <section class="demo-card" aria-labelledby="demo-title">
+      <h2 id="demo-title" class="sr-only">语音圆球交互演示</h2>
+      <div class="orb-stage">
+        <div class="orb-guide" aria-hidden="true"></div>
+        <div class="orb-frame">
+          <canvas id="voice-orb" aria-label="实时语音圆球"></canvas>
+        </div>
+        <p class="live-status">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span id="live-status-text">聆听中</span>
+        </p>
+        <p id="renderer-badge" class="renderer-badge">正在检测渲染器…</p>
+      </div>
+
+      <form class="control-panel" id="controls">
+        <fieldset>
+          <legend>会话阶段</legend>
+          <div class="segmented" id="phase-control">
+            <button type="button" data-phase="inactive">未启动</button>
+            <button type="button" data-phase="starting">连接中</button>
+            <button type="button" data-phase="active" class="is-active">活动</button>
+            <button type="button" data-phase="stopping">结束中</button>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>活动状态</legend>
+          <div class="segmented" id="activity-control">
+            <button type="button" data-activity="idle">空闲</button>
+            <button type="button" data-activity="listening" class="is-active">聆听</button>
+            <button type="button" data-activity="thinking">思考</button>
+            <button type="button" data-activity="speaking">说话</button>
+          </div>
+        </fieldset>
+
+        <fieldset class="slider-group">
+          <legend class="field-heading">
+            <span>模拟强度</span>
+            <output id="level-output" for="level-control">35%</output>
+          </legend>
+          <input id="level-control" type="range" min="0" max="100" value="35" step="1">
+        </fieldset>
+
+        <fieldset class="slider-group">
+          <legend class="field-heading">
+            <span>固定预览时间</span>
+            <output id="time-output" for="time-control">实时</output>
+          </legend>
+          <input id="time-control" type="range" min="-1" max="12000" value="-1" step="100">
+          <p class="field-hint">设为固定毫秒值后暂停 RAF，便于生成可重复截图。</p>
+        </fieldset>
+
+        <div class="button-stack">
+          <button type="button" id="microphone-button" class="primary-button">
+            <span aria-hidden="true">◉</span>
+            使用麦克风测试
+          </button>
+          <button type="button" id="fallback-button" class="secondary-button">
+            切换至 Canvas 2D
+          </button>
+        </div>
+
+        <label class="check-row">
+          <input id="broadcast-control" type="checkbox" checked>
+          <span>跨窗口同步音频能量</span>
+        </label>
+
+        <p id="input-note" class="input-note">
+          当前使用合成音频。原版分析 GPT/WebRTC 输出流；麦克风仅供此独立演示测试。
+        </p>
+        <p id="error-message" class="error-message" role="alert" hidden></p>
+      </form>
+    </section>
+
+    <section class="notes-grid" aria-label="实现摘要">
+      <article>
+        <span>01</span>
+        <h2>状态</h2>
+        <p>会话阶段与聆听、思考、说话权重分离，使用约 280ms 指数平滑过渡。</p>
+      </article>
+      <article>
+        <span>02</span>
+        <h2>声音</h2>
+        <p>低、中、高三段频谱和累计能量同时控制半径、流速、UV 扭曲与颜色细节。</p>
+      </article>
+      <article>
+        <span>03</span>
+        <h2>纹理</h2>
+        <p>Classic noise、五层 FBM 和多尺度水彩扰动合成持续流动的蓝紫色球体。</p>
+      </article>
+    </section>
+
+    <footer>
+      <p>Independent local study · Not official OpenAI source code</p>
+      <span>Zero dependencies · WebGL 1 + Canvas 2D fallback</span>
+    </footer>
+  </main>
+
+  <script src="./voice-orb.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

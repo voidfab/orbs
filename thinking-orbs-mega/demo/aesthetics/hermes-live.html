@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hermes / ChatGPT Live glow — review</title>
+  <style>
+    :root { color-scheme: light; }
+    html, body { margin: 0; min-height: 100%; background: #f8fafc; color: #1e293b; font: 14px/1.45 ui-sans-serif, system-ui, sans-serif; }
+    body { display: flex; flex-direction: column; align-items: center; padding: 28px 16px 48px; }
+    h1 { font-size: 18px; margin: 0 0 6px; }
+    p { max-width: 56ch; color: #64748b; margin: 0 0 16px; text-align: center; }
+    .stage {
+      width: min(420px, 92vw); height: min(420px, 92vw);
+      border-radius: 24px; background: #5b6f91;
+      display: grid; place-items: center; box-shadow: 0 20px 60px rgba(80,120,200,.18);
+    }
+    canvas { display: block; width: 100%; height: 100%; }
+    .bar { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; justify-content: center; margin: 18px 0; }
+    label { color: #64748b; display: flex; align-items: center; gap: 8px; }
+    a { color: inherit; }
+    .chip { padding: 2px 8px; border-radius: 999px; font-size: 12px; }
+    .listen { background: #dcfce7; color: #166534; }
+    .think { background: #fef3c7; color: #92400e; }
+    .speak { background: #dbeafe; color: #1d4ed8; }
+  </style>
+</head>
+<body>
+  <h1>Hermes Live glow</h1>
+  <p>
+    Soft white → periwinkle sphere from the Hermes Desktop Voice HUD / ChatGPT Live study.
+    Filled radial gradients — <strong>not</strong> extracted into the dotted megafork engine.
+    The periwinkle ramp landed as palette <code>live</code> on the 2D orbs.
+  </p>
+  <div class="bar">
+    <label>phase
+      <select id="phase">
+        <option value="listening">listening</option>
+        <option value="thinking">thinking</option>
+        <option value="speaking">speaking</option>
+      </select>
+    </label>
+    <label>level
+      <input id="level" type="range" min="0" max="1" step="0.01" value="0.35" />
+    </label>
+    <span id="chip" class="chip listen">listen</span>
+    <a href="/play.html">back to hub</a>
+  </div>
+  <div class="stage"><canvas id="c" width="320" height="320"></canvas></div>
+  <script type="module" src="./hermes-live.js"></script>
+</body>
+</html>
