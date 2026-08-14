@@ -51,7 +51,7 @@ const WIDGET_ID = "thinking-orbs";
 const HIDDEN_WORKING_INDICATOR = { frames: [] };
 const STATIC_FRAME_SECONDS = 1.25;
 const EXTENSION_VERSION = packageMetadata.version;
-const THINKING_ORBS_VERSION = "0.1.1";
+const THINKING_ORBS_VERSION = "0.4.0";
 
 type ImageProtocol = "kitty" | "iterm2" | null;
 type RendererStatus = "not attempted" | "available" | "unavailable";

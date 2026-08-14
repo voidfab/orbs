@@ -42,7 +42,7 @@ Playable review: `npm run review` then open [http://127.0.0.1:5177/review.html](
 | morphing-orbs | **VENDOR** + **EXTRACT** | `renderer="svg"` |
 | schoolees | **VENDOR** + **EXTRACT** | `responding`; contour family deferred |
 | RN views (shrit1401) | **VENDOR** | `ports/react-native-views` (no-Skia alternative) |
-| pi-thinking-orbs | **VENDOR** | `ports/pi` |
+| pi-thinking-orbs | **VENDOR** + **WIRED** | `ports/pi` now paints the megafork engine. `pi install .` |
 
 Skipped from those Swifts: Ripul-style full engine clones, AppKit/tint/`scenePhase` host glue.
 

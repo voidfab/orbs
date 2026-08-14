@@ -45,6 +45,7 @@
     "review:ports": "node scripts/review-web.mjs --ports",
     "build": "vite build",
     "build:demo": "vite build --config vite.config.demo.ts",
+    "build:hermes": "vite build --config ports/hermes/vite.config.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "smoke": "node scripts/smoke.mjs",

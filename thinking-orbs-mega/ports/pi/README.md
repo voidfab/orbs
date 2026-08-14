@@ -8,14 +8,21 @@ It uses real 64×64 RGBA PNG frames through Pi's Kitty or iTerm2 image support. 
 
 ## Install
 
+From this checkout (uses the megafork engine, not the npm `thinking-orbs` package):
+
 ```bash
-pi install npm:pi-thinking-orbs
+cd thinking-orbs-mega
+npm install
+npm run build
+cd ports/pi
+npm install
+pi install .
 ```
 
 Try it without installing:
 
 ```bash
-pi -e npm:pi-thinking-orbs
+pi -e .
 ```
 
 After installation, start Pi and run `/orbs` to open the settings menu.

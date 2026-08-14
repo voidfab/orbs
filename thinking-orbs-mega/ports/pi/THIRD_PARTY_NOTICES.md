@@ -2,7 +2,7 @@
 
 ## thinking-orbs
 
-This package uses the Canvas painters and presets exported by [thinking-orbs](https://github.com/Jakubantalik/thinking-orbs).
+This package uses the Canvas painters and presets from **thinking-orbs-mega**, a megafork of [thinking-orbs](https://github.com/Jakubantalik/thinking-orbs) 0.3.1.
 
 MIT License
 

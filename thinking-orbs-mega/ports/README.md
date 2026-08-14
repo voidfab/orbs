@@ -14,7 +14,8 @@ states are the contract they all share; extra megafork verbs live in TS first.
 | [`svg-morphing`](./svg-morphing) | React SVG | Vector renderer; `renderer="svg"` on the megafork component |
 | [`vanilla`](./vanilla) | Custom element | Schoolees — contour variant + `responding` (extracted) |
 | [`react-native-views`](./react-native-views) | RN `View` (no Skia) | 6-state bind for hosts that cannot take Skia |
-| [`pi`](./pi) | Pi terminal | Kitty/iTerm PNG frames |
+| [`pi`](./pi) | Pi terminal | Megafork engine → Kitty/iTerm PNG frames. `pi install .` from this folder |
+| [`hermes`](./hermes) | Hermes Desktop | Bundled `plugin.js` for `~/.hermes/desktop-plugins/thinking-orbs` |
 | [`ios/ThinkingOrbs`](./ios/ThinkingOrbs) | SwiftUI + AppKit SPM | CGContext engine, two front ends |
 | [`ios/ThinkingOrbsKit`](./ios/ThinkingOrbsKit) | Multiplatform SwiftUI SPM | Compact / regular / large sizes |
 | [`aesthetics`](./aesthetics) | Playable sidecar demos | WebGL / glow orbs that were **not** extracted |

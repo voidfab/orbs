@@ -1,5 +1,5 @@
 import { createCanvas } from "@napi-rs/canvas";
-import { MODE_DRAWS, resolvePreset } from "thinking-orbs";
+import { MODE_DRAWS, resolvePreset } from "thinking-orbs-mega/engine";
 import type { OrbVisualState } from "./activity.ts";
 import { DEFAULT_ORB_CONFIG } from "./render-policy.ts";
 

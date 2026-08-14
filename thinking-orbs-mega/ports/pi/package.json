@@ -4,14 +4,15 @@
   "description": "Animated Thinking Orbs activity states for the Pi coding agent terminal UI.",
   "type": "module",
   "license": "MIT",
-  "author": "ringoshiina",
+  "author": "Fox9 / voidfab",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ringoshiina/pi-thinking-orbs.git"
+    "url": "git+https://github.com/voidfab/orbs.git",
+    "directory": "thinking-orbs-mega/ports/pi"
   },
-  "homepage": "https://github.com/ringoshiina/pi-thinking-orbs#readme",
+  "homepage": "https://github.com/voidfab/orbs#readme",
   "bugs": {
-    "url": "https://github.com/ringoshiina/pi-thinking-orbs/issues"
+    "url": "https://github.com/voidfab/orbs/issues"
   },
   "keywords": [
     "pi-package",
@@ -35,9 +36,7 @@
   },
   "dependencies": {
     "@napi-rs/canvas": "1.0.3",
-    "react": "19.1.1",
-    "react-dom": "19.1.1",
-    "thinking-orbs": "0.1.1"
+    "thinking-orbs-mega": "file:../.."
   },
   "peerDependencies": {
     "@earendil-works/pi-coding-agent": "*",
