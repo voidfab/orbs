@@ -48,13 +48,25 @@ const EXTRACTED = new Set<OrbState>([
 
 type Tab = 'gallery' | 'skins';
 
+function bootFromUrl(): { renderer: 'canvas' | 'svg'; state: OrbState; solo: boolean } {
+  if (typeof location === 'undefined') return { renderer: 'canvas', state: 'working', solo: false };
+  const q = new URLSearchParams(location.search);
+  const renderer = q.get('renderer') === 'svg' ? 'svg' : 'canvas';
+  const raw = q.get('state');
+  const state = (ORB_STATES as readonly string[]).includes(raw ?? '') ? (raw as OrbState) : 'working';
+  const solo = q.get('solo') === '1';
+  return { renderer, state, solo };
+}
+
 export function ReviewApp() {
+  const boot = bootFromUrl();
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [tab, setTab] = useState<Tab>('gallery');
-  const [state, setState] = useState<OrbState>('working');
+  const [state, setState] = useState<OrbState>(boot.state);
   const [size, setSize] = useState(64);
   const [speed, setSpeed] = useState(1);
-  const [renderer, setRenderer] = useState<'canvas' | 'svg'>('canvas');
+  const [renderer, setRenderer] = useState<'canvas' | 'svg'>(boot.renderer);
+  const solo = boot.solo;
   const [variant, setVariant] = useState<OrbVariant>('classic');
   const [volumeOn, setVolumeOn] = useState(false);
   const [volume, setVolume] = useState(0.55);
@@ -83,7 +95,8 @@ export function ReviewApp() {
           Official 0.3.1 engine plus fork extras. Classic dots morph between states. Contour is
           the Schoolees line-cage family. Hover uses the localized pointer spring. Skins are
           isolated aesthetic orbs with real phase mixing. The Fox9 conversation field is{' '}
-          <a href="/seam.html">Seam</a>.
+          <a href="/seam.html">Seam</a>. Presence realms live at{' '}
+          <a href="http://127.0.0.1:5188/review.html">:5188</a>.
         </p>
         <nav className="tabs">
           <button type="button" className={tab === 'gallery' ? 'chip on' : 'chip'} onClick={() => setTab('gallery')}>
@@ -274,7 +287,7 @@ export function ReviewApp() {
               </div>
             </div>
           </div>
-          <div className="grid">
+          {solo ? null : <div className="grid">
             {states.map((s) => (
               <button
                 key={s}
@@ -300,7 +313,7 @@ export function ReviewApp() {
                 <span className="name">{s}</span>
               </button>
             ))}
-          </div>
+          </div>}
         </>
       ) : (
         <div className="skin-list">

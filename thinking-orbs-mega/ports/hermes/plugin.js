@@ -3653,6 +3653,14 @@ const VOICE_BUS = "hermes:voice-bus";
 const $state = atom("idle");
 const $preview = atom("");
 const bySession = /* @__PURE__ */ new Map();
+function sessionAtom() {
+  return host.state.focusedSessionId || host.state.activeSessionId;
+}
+function currentSid() {
+  const atom2 = sessionAtom();
+  const id = atom2 && typeof atom2.get === "function" ? atom2.get() : null;
+  return typeof id === "string" && id.length > 0 ? id : "";
+}
 function currentState() {
   return $preview.get() || $state.get();
 }
@@ -3662,12 +3670,12 @@ function eventIds(event, payload) {
 }
 function showFor(sid, next) {
   if (sid) bySession.set(sid, next);
-  const active = host.state.activeSessionId.get();
-  if (!active || !sid || sid === active) $state.set(next);
+  const focused = currentSid();
+  if (!focused || !sid || sid === focused) $state.set(next);
 }
 function showActive() {
-  const active = host.state.activeSessionId.get();
-  $state.set(active && bySession.get(active) || "idle");
+  const focused = currentSid();
+  $state.set(focused && bySession.get(focused) || "idle");
 }
 function isDark() {
   var _a, _b;
@@ -3752,7 +3760,7 @@ function applyEvent(event) {
   if (type === "thinking.delta") return;
   const payload = event.payload && typeof event.payload === "object" ? event.payload : {};
   const ids = eventIds(event, payload);
-  const active = host.state.activeSessionId.get();
+  const active = currentSid();
   const sid = ids[0] || active || "";
   const forActive = !ids.length || active && ids.includes(active);
   if (type === "session.info" && typeof payload.running === "boolean") {
@@ -3783,9 +3791,8 @@ function onVoiceBus(event) {
   const detail = (event == null ? void 0 : event.detail) && typeof event.detail === "object" ? event.detail : {};
   const phase = String(detail.phase || detail.state || "");
   if (!phase) return;
-  const active = host.state.activeSessionId.get();
   $preview.set("");
-  showFor(active || "", phaseToOrbState(phase, detail.toolName));
+  showFor(currentSid() || "", phaseToOrbState(phase, detail.toolName));
 }
 const plugin = {
   id: ID,
@@ -3793,7 +3800,7 @@ const plugin = {
   defaultEnabled: true,
   register(ctx) {
     const offGw = host.onEvent("*", applyEvent);
-    const sidAtom = host.state.activeSessionId;
+    const sidAtom = sessionAtom();
     const offSid = typeof sidAtom.subscribe === "function" ? sidAtom.subscribe(() => showActive()) : typeof sidAtom.listen === "function" ? sidAtom.listen(() => showActive()) : null;
     showActive();
     if (typeof window !== "undefined") {

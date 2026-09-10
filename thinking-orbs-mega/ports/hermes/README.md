@@ -32,6 +32,8 @@ Then **Reload desktop plugins** from ⌘K. Enable **Thinking Orbs** in Settings 
 
 Voice phases on `hermes:voice-bus` map to `listening` / `thinking` / `speaking`. Gateway `message.start` → thinking, `message.delta` → composing, tool starts → working / searching / shaping.
 
+The pane follows `host.state.focusedSessionId` (tile-aware, post-Desktop update) and falls back to `activeSessionId` on older builds. Per-session orb state is cached so switching tiles restores that session's last verb.
+
 ## License
 
 MIT. Engine © Jakub Antalik (thinking-orbs 0.3.1) and Fox9 / voidfab.

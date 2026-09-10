@@ -84,6 +84,7 @@ export function ThinkingOrb({
   ...rest
 }: ThinkingOrbProps) {
   const ref = useRef<HTMLCanvasElement | null>(null);
+  const wrapRef = useRef<HTMLDivElement | null>(null);
   const dark = useResolvedDark(theme, ref);
   const reducedPref = useReducedMotion();
   const reduced = reducedMotionProp ?? reducedPref;
@@ -364,7 +365,11 @@ export function ThinkingOrb({
             else stop();
           })
         : null;
-    io?.observe(canvas);
+    // Observe the wrapper, not the canvas. In SVG mode the canvas is
+    // `display: none` and IntersectionObserver treats that as off-screen,
+    // which used to stop the clock and kill state morphs.
+    const visibleRoot: HTMLElement = wrapRef.current ?? canvas;
+    io?.observe(visibleRoot);
     const onVis = () => {
       if (document.visibilityState === 'hidden') stop();
       else if (visible) start();
@@ -394,7 +399,7 @@ export function ThinkingOrb({
     };
     const onMove = (e: PointerEvent) => {
       if (e.pointerType === 'touch') return;
-      const r = canvas.getBoundingClientRect();
+      const r = visibleRoot.getBoundingClientRect();
       hover.current.x = (e.clientX - r.left) / Math.max(1, r.width);
       hover.current.y = (e.clientY - r.top) / Math.max(1, r.height);
       if (stopProp) e.stopPropagation();
@@ -405,9 +410,9 @@ export function ThinkingOrb({
     const onBlur = () => {
       hover.current.focus = false;
     };
-    canvas.addEventListener('pointerenter', onEnter);
-    canvas.addEventListener('pointerleave', onLeave);
-    canvas.addEventListener('pointermove', onMove);
+    visibleRoot.addEventListener('pointerenter', onEnter);
+    visibleRoot.addEventListener('pointerleave', onLeave);
+    visibleRoot.addEventListener('pointermove', onMove);
     canvas.addEventListener('focus', onFocus);
     canvas.addEventListener('blur', onBlur);
 
@@ -416,9 +421,9 @@ export function ThinkingOrb({
       io?.disconnect();
       document.removeEventListener('visibilitychange', onVis);
       dprMq?.removeEventListener('change', onDpr);
-      canvas.removeEventListener('pointerenter', onEnter);
-      canvas.removeEventListener('pointerleave', onLeave);
-      canvas.removeEventListener('pointermove', onMove);
+      visibleRoot.removeEventListener('pointerenter', onEnter);
+      visibleRoot.removeEventListener('pointerleave', onLeave);
+      visibleRoot.removeEventListener('pointermove', onMove);
       canvas.removeEventListener('focus', onFocus);
       canvas.removeEventListener('blur', onBlur);
     };
@@ -428,6 +433,7 @@ export function ThinkingOrb({
 
   return (
     <div
+      ref={wrapRef}
       role="img"
       aria-label={ariaLabel ?? STATE_LABELS[state]}
       style={{ width: size, height: size, display: 'block', position: 'relative', ...style }}

@@ -8,6 +8,8 @@ Terms: [GLOSSARY.md](./GLOSSARY.md) · Inventory: [FORKS.md](./FORKS.md) · Cred
 
 Dotted thought-orb indicators for AI and agent UIs. Plain 2D canvas — no WebGL, no `ctx.filter`. Official live demo of the upstream nine: [orbs.jakubantalik.com](https://orbs.jakubantalik.com).
 
+Sibling [`presence/`](../presence/) is the shared conversation bus and the other visualization realms (face, ghost, identity, meters, textmode, …). Review gallery: `http://127.0.0.1:5188/review.html`.
+
 ## Attribution
 
 Upstream **thinking-orbs** is MIT © [Jakub Antalik](https://github.com/Jakubantalik/thinking-orbs). This megafork keeps that license and copyright, and adds a Fox9 copyright for Seam and integration work.

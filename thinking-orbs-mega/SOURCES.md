@@ -14,6 +14,22 @@ Use this file to (A) attribute and (B) re-check a remote before pulling a later 
 
 Several first-drop zips (`main-size`, `engine-canvas-decoupling`, `feat-color-expansion`, `feat-state-transitions`, `cubed`) still declare that same Jakub remote in `package.json`. They were local / task branches, not separate GitHub repos. Re-check **Jakubantalik/thinking-orbs**, not a second URL.
 
+## Presence package (sibling, not this engine)
+
+Face harvest lives in `../presence/`, not in this megafork.
+
+| Remote | What we took |
+|---|---|
+| https://github.com/jeremy-prt/bloub | Face pose engine (14 Grok-measured states) |
+| https://github.com/Alain00/blobatar | Identity blobatars + expressions |
+| https://github.com/NeonGate-AI/orbz | CSS/WAAPI layered orb config |
+| https://github.com/guillermolg00/morphicons | Stroke-icon morph core |
+| https://github.com/isoden/claude-terminal-face | OSC 12 key palette + hook map |
+| https://github.com/tornikegomareli/Aurora | Glow mood/palette tables (no LICENSE in drop; Metal not copied) |
+| https://github.com/humanbydefinition/textmode.js | Character-grid contract (WebGL engine not vendored) |
+| Fox9 `apps/glyph` Cast | Seal / Hyphae / Beat engines + phase drive |
+| https://github.com/AlexZeitler/cliamp-plugin-vu-meter | Braille 2×4 canvas + Bresenham needles |
+
 ## Extracted into the TypeScript engine
 
 | Remote | What we took |

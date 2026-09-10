@@ -25,6 +25,16 @@ const $preview = atom('')
 /** Runtime session id → last orb state. Only the focused session is shown. */
 const bySession = new Map()
 
+function sessionAtom() {
+  return host.state.focusedSessionId || host.state.activeSessionId
+}
+
+function currentSid() {
+  const atom = sessionAtom()
+  const id = atom && typeof atom.get === 'function' ? atom.get() : null
+  return typeof id === 'string' && id.length > 0 ? id : ''
+}
+
 function currentState() {
   return $preview.get() || $state.get()
 }
@@ -36,13 +46,13 @@ function eventIds(event, payload) {
 
 function showFor(sid, next) {
   if (sid) bySession.set(sid, next)
-  const active = host.state.activeSessionId.get()
-  if (!active || !sid || sid === active) $state.set(next)
+  const focused = currentSid()
+  if (!focused || !sid || sid === focused) $state.set(next)
 }
 
 function showActive() {
-  const active = host.state.activeSessionId.get()
-  $state.set((active && bySession.get(active)) || 'idle')
+  const focused = currentSid()
+  $state.set((focused && bySession.get(focused)) || 'idle')
 }
 
 function isDark() {
@@ -135,7 +145,7 @@ function applyEvent(event) {
 
   const payload = event.payload && typeof event.payload === 'object' ? event.payload : {}
   const ids = eventIds(event, payload)
-  const active = host.state.activeSessionId.get()
+  const active = currentSid()
   const sid = ids[0] || active || ''
 
   // Unscoped stream events belong to the focused turn. Scoped events from
@@ -172,9 +182,8 @@ function onVoiceBus(event) {
   const detail = event?.detail && typeof event.detail === 'object' ? event.detail : {}
   const phase = String(detail.phase || detail.state || '')
   if (!phase) return
-  const active = host.state.activeSessionId.get()
   $preview.set('')
-  showFor(active || '', phaseToOrbState(phase, detail.toolName))
+  showFor(currentSid() || '', phaseToOrbState(phase, detail.toolName))
 }
 
 export default {
@@ -183,7 +192,7 @@ export default {
   defaultEnabled: true,
   register(ctx) {
     const offGw = host.onEvent('*', applyEvent)
-    const sidAtom = host.state.activeSessionId
+    const sidAtom = sessionAtom()
     const offSid =
       typeof sidAtom.subscribe === 'function'
         ? sidAtom.subscribe(() => showActive())

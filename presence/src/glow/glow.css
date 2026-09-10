@@ -1,0 +1,102 @@
+.aurora-host {
+  box-sizing: border-box;
+  display: inline-grid;
+  isolation: isolate;
+  place-items: center;
+  vertical-align: middle;
+}
+
+.aurora-host *,
+.aurora-host *::before,
+.aurora-host *::after {
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+.aurora-root {
+  border-radius: 28%;
+  display: grid;
+  height: var(--aurora-size);
+  isolation: isolate;
+  place-items: center;
+  position: relative;
+  width: var(--aurora-size);
+}
+
+.aurora-aura,
+.aurora-wash,
+.aurora-ring,
+.aurora-core,
+.aurora-spark {
+  position: absolute;
+}
+
+.aurora-aura {
+  background: conic-gradient(
+    from 0deg,
+    var(--aurora-a0),
+    var(--aurora-a1),
+    var(--aurora-a2),
+    var(--aurora-a3),
+    var(--aurora-a0)
+  );
+  border-radius: 32%;
+  filter: blur(calc(var(--aurora-size) * 0.16)) saturate(1.35)
+    brightness(var(--aurora-energy, 1));
+  inset: -20%;
+  opacity: 0.92;
+}
+
+.aurora-wash {
+  background: radial-gradient(
+    circle at 50% 80%,
+    color-mix(in srgb, var(--aurora-base) 70%, transparent) 0%,
+    transparent 62%
+  );
+  border-radius: 30%;
+  filter: blur(calc(var(--aurora-size) * 0.1));
+  inset: -8%;
+  mix-blend-mode: screen;
+}
+
+.aurora-ring {
+  border: 1.5px solid color-mix(in srgb, var(--aurora-a0) 55%, var(--aurora-base));
+  border-radius: 26%;
+  box-shadow:
+    0 0 calc(var(--aurora-size) * 0.14) color-mix(in srgb, var(--aurora-a1) 45%, transparent),
+    0 0 calc(var(--aurora-size) * 0.28) color-mix(in srgb, var(--aurora-base) 28%, transparent),
+    inset 0 0 calc(var(--aurora-size) * 0.08) color-mix(in srgb, var(--aurora-a3) 22%, transparent);
+  inset: 6%;
+}
+
+.aurora-core {
+  background: var(--aurora-plate);
+  border-radius: 22%;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 8%);
+  inset: 16%;
+}
+
+.aurora-spark {
+  background: radial-gradient(
+    circle at 35% 30%,
+    color-mix(in srgb, var(--aurora-a0) 80%, white) 0%,
+    transparent 68%
+  );
+  border-radius: 50%;
+  filter: blur(calc(var(--aurora-size) * 0.04));
+  height: 38%;
+  left: 18%;
+  mix-blend-mode: screen;
+  opacity: 0.85;
+  top: 16%;
+  width: 38%;
+}
+
+html[data-theme='light'] .aurora-wash {
+  mix-blend-mode: multiply;
+}
+
+html[data-theme='light'] .aurora-spark {
+  mix-blend-mode: multiply;
+  opacity: 0.55;
+}
