@@ -1,6 +1,6 @@
 # Realms — agentic-state visualization beyond orbs
 
-The megafork in `thinking-orbs-mega/` is one family: dotted 2D `ModeFrame` → `{dots, lines}`. This drop in `_new/` (gitignored, 146 zips) is the material to grow **other families** that can show the same agentic states.
+The megafork in `thinking-orbs-mega/` is one family: dotted 2D `ModeFrame` → `{dots, lines}`. Later zip drops live in `_new/` (gitignored). After a source is harvested into `presence/` or the megafork, its zip moves to `_processed/` (also gitignored).
 
 Orb verdicts stay in [`thinking-orbs-mega/FORKS.md`](thinking-orbs-mega/FORKS.md). This file is the expansion map.
 
@@ -141,6 +141,8 @@ Seam already analyses RMS / bands / onset. If we need a better analyser, **wavef
 ## First harvest order
 
 Usable package: [`presence/`](presence/). Review: `cd presence && npm run review` → http://127.0.0.1:5188/review.html
+
+Harvested zip drops (bloub, blobatar, orbz, morphicons, claude-terminal-face, waveform-component, textmode.js, cliamp meters, hitch-face, agentpet, Aurora) now live in `_processed/`.
 
 | # | Item | Status |
 |---|---|---|

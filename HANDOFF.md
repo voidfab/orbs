@@ -53,7 +53,7 @@ Ghost is `FacePresence shape="ghost"`. Blob poses modulate the sheet; thinking k
 
 ## Gotchas
 
-- `_new/` stays local. Never commit zip drops or `node_modules` under ports.
+- `_new/` and `_processed/` stay local. Never commit zip drops or `node_modules` under ports. Harvested zips move `_new/` → `_processed/`.
 - SVG mode must observe the wrapper, not the hidden canvas, or the morph clock stops.
 - The full SVG review grid (all 49 orbs) is expensive once that clock is alive. Boot `?renderer=svg&state=working&solo=1` for a single morphing orb.
 - Aurora's zip/GitHub have no LICENSE. Presence glow copies only mood/palette tables as CSS; never the Metal shader.

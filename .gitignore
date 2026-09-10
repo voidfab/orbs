@@ -1,5 +1,7 @@
 # Later drops still being reviewed. Not part of the megafork tree.
 _new/
+# Already harvested zip drops (stay local).
+_processed/
 
 # Local / machine junk
 .DS_Store
