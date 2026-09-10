@@ -5,6 +5,7 @@ import type {
 } from "@earendil-works/pi-coding-agent";
 import { getCapabilities } from "@earendil-works/pi-tui";
 import packageMetadata from "./package.json" with { type: "json" };
+import { PresenceHost, pushPiActivity } from "presence/host";
 import {
   createActivitySnapshot,
   reduceActivity,
@@ -67,6 +68,7 @@ function describeError(error: unknown): string {
 
 export default function thinkingOrbsExtension(pi: ExtensionAPI): void {
   let activity: ActivitySnapshot = createActivitySnapshot();
+  const presence = new PresenceHost({ audio: "off" });
   let settings: OrbSettings = { ...DEFAULT_ORB_SETTINGS };
   let renderMode: OrbRenderMode = "off";
   let imageProtocol: ImageProtocol = null;
@@ -217,6 +219,7 @@ export default function thinkingOrbsExtension(pi: ExtensionAPI): void {
       stopPreview(ctx, false);
     }
     activity = reduceActivity(activity, event);
+    pushPiActivity(presence, event);
     reconcile(ctx);
   }
 
@@ -457,6 +460,7 @@ export default function thinkingOrbsExtension(pi: ExtensionAPI): void {
     previewState = undefined;
     if (ctx.mode !== "tui") {
       activity = createActivitySnapshot();
+      presence.reset();
       renderMode = "off";
       return;
     }
@@ -465,12 +469,14 @@ export default function thinkingOrbsExtension(pi: ExtensionAPI): void {
     unmountWidget(ctx, true);
     ctx.ui.setWorkingIndicator(undefined);
     activity = createActivitySnapshot();
+    presence.reset();
     renderMode = "off";
   }
 
   pi.on("session_start", async (_event, ctx) => {
     if (ctx.mode !== "tui") return;
     sessionActive = true;
+    presence.push({ kind: "session.start" });
 
     const loaded = await loadSettings(settingsPath);
     settings = loaded.settings;

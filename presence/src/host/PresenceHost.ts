@@ -4,14 +4,14 @@ import {
   snapshotFromFlags,
   type ConversationEvent,
   type ConversationFlags
-} from '../bus/reduce';
+} from '../bus/reduce.ts';
 import {
   IDLE_SNAPSHOT,
   SILENT_DUPLEX,
   type DuplexChannels,
   type PresencePhase,
   type PresenceSnapshot
-} from '../bus/types';
+} from '../bus/types.ts';
 
 export type AudioPolicy = 'off' | 'listen' | 'duplex';
 

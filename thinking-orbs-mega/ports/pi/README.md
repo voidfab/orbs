@@ -6,6 +6,8 @@ An unofficial [Pi](https://pi.dev) extension that renders the upstream [Thinking
 
 It uses real 64×64 RGBA PNG frames through Pi's Kitty or iTerm2 image support. Terminals without an image protocol, or systems where the native Canvas renderer cannot load, fall back to a text spinner.
 
+Activity events also drive a `PresenceHost` (`presence/host`) so the same conversation bus as the gallery (face, glow, textmode, …) sees the live turn. The widget still paints orb verbs (`searching` / `shaping` / …) from tool priority.
+
 ## Install
 
 From this checkout (uses the megafork engine, not the npm `thinking-orbs` package):

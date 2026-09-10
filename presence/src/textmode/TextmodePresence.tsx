@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import type { PresenceSnapshot } from '../bus/types';
 import { PHASE_LABELS } from '../bus/types';
 import { subscribe } from '../clock';
-import type { CastEngine } from './cast';
+import type { TextmodeEngine } from './engines';
 import { textmodeGrid } from './engines';
 import { paintTextmode } from './grid';
 
@@ -21,7 +21,7 @@ export function TextmodePresence({
   paused?: boolean;
   cols?: number;
   rows?: number;
-  engine?: CastEngine | 'auto';
+  engine?: TextmodeEngine;
 }) {
   const ref = useRef<HTMLCanvasElement>(null);
   const tRef = useRef(0);

@@ -8,6 +8,10 @@ The `handoff-create --changelog` flow appends entries to "## Unreleased" as you 
 
 ## Unreleased
 
+- Pi and Hermes consume `PresenceHost` (same conversation bus as the gallery).
+- Harvested grokbot-wall brand ramps, ttfx matrix/decrypt/waves, Cuelume phase cues, boring-avatars identicon, respinner waiting wave.
+- DAW and demoscene zip drops moved to `_later/` (local).
+
 ### presence 0.1.0–0.9.1 (new package)
 
 Shared conversation bus plus visualization realms. Review gallery at `:5188/review.html`.

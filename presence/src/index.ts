@@ -39,6 +39,15 @@ export {
 
 export { FacePresence, type FacePresenceProps } from './face/FacePresence';
 export { GhostPresence } from './face/GhostPresence';
+export {
+  GROKBOT_BRAND,
+  GROKBOT_FORM_MOTION,
+  GROKBOT_FORM_SHAPE,
+  grokbotInk,
+  grokbotMotion,
+  type GrokbotBrandName,
+  type GrokbotForm
+} from './face/brand';
 export { toFaceState } from './face/map';
 export { BotEngine } from './face/bloub/engine';
 export { SEQUENCE, STATES, STATE_BY_ID, POSES, type StateId } from './face/bloub/states';
@@ -61,6 +70,7 @@ export {
 } from './terminal/osc';
 
 export { GlyphPresence } from './glyph/GlyphPresence';
+export { WaveSpinner } from './glyph/spinner';
 export { GLYPH_PATHS, glyphFor } from './glyph/icons';
 export { morphD } from './glyph/morph';
 
@@ -75,6 +85,7 @@ export {
 } from './identity/map';
 export { blobatar } from './identity/blobatar/blobatar';
 export { normalizeSeed } from './identity/blobatar/hash';
+export { identiconSvg } from './identity/identicon';
 
 export { CssOrbPresence } from './css-orb/CssOrbPresence';
 export { CSS_ORB_STATES, cssOrbSpeed, toCssOrbState, type CssOrbState } from './css-orb/map';
@@ -105,7 +116,8 @@ export {
   type CharacterGrid,
   type GridCell
 } from './textmode/grid';
-export { textmodeGrid } from './textmode/engines';
+export { textmodeGrid, type TextmodeEngine } from './textmode/engines';
+export { TTFX_EFFECTS, TTFX_ENGINES, autoTtfxEngine, type TtfxEngine } from './textmode/ttfx';
 export {
   CAST_ENGINES,
   CAST_RUNE,
@@ -140,5 +152,9 @@ export {
 
 export { PresenceHost, type AudioPolicy, type PresenceHostOptions, type PresenceListener } from './host/PresenceHost';
 export { usePresenceHost } from './host/usePresenceHost';
+export { pushHermesGateway, pushPiActivity, pushVoiceBus } from './host/drive';
 
 export { DEMO_TURN, DEMO_TURN_DURATION, snapshotAt, type TimedEvent } from './conversation/script';
+
+export { cueForPhase, playCue, playPhaseCue, setCueEnabled } from './cue/play';
+export { RECIPES, type CueName } from './cue/recipes';

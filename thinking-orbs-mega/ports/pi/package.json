@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "@napi-rs/canvas": "1.0.3",
+    "presence": "file:../../../presence",
     "thinking-orbs-mega": "file:../.."
   },
   "peerDependencies": {

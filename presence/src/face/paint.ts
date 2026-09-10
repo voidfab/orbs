@@ -7,10 +7,11 @@ export interface FacePaintTheme {
   paper: string;
 }
 
-export function faceTheme(dark: boolean): FacePaintTheme {
-  return dark
+export function faceTheme(dark: boolean, ink?: string): FacePaintTheme {
+  const theme = dark
     ? { dark: true, ink: '#f4f4f5', paper: '#111113' }
     : { dark: false, ink: '#111113', paper: '#f4f4f5' };
+  return ink ? { ...theme, ink } : theme;
 }
 
 function parseMatrix(m: string): DOMMatrix | null {

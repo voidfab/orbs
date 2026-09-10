@@ -1,5 +1,5 @@
-import type { PresencePhase } from './types';
-import { reduceEvents, type ConversationEvent } from './reduce';
+import type { PresencePhase } from './types.ts';
+import { reduceEvents, type ConversationEvent } from './reduce.ts';
 
 /** AgentPet `AgentState` — lifecycle independent of which CLI produced it. */
 export type AgentPetState = 'registered' | 'working' | 'waiting' | 'done' | 'idle';

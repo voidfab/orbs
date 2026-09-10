@@ -88,6 +88,35 @@ Afterimage of the last named phase. The verb matches Conversation Seam's
 fainter overlay knot. The TTY skin reuses the claude-terminal-face glyph
 rows. `ghostty-web` (full VT emulator) was not vendored.
 
+## Grok Bot brand (harvested table)
+
+**grokbot-wall** — meetup wall using official Grok Bot silhouettes and brand ramps.
+
+`src/face/brand.ts` copies the colour names/hexes, idle motions, and form→shape map.
+The Luma check-in wall, email queue, and Three.js ASCII shader were not copied.
+
+## ttfx verbs
+
+**ttfx** (TerminalTextEffects port vendored by omacy) — effect names only.
+
+`src/textmode/ttfx.ts` lists the verbs and paints three portable grid skins
+(matrix, decrypt, waves). The Metal screensaver host was not copied.
+
+## Cuelume cues
+
+**cuelume** — https://github.com/Danilaa1/cuelume (MIT © 2026 Daniel Belyi).
+
+A subset of synthesized Web Audio recipes plus a slim player. The full 17-sound
+palette and DOM `bind()` helper were not copied.
+
+## Identicon fallback
+
+**boring-avatars** marble hash (MIT). Name → SVG, no expression axis.
+
+## Waiting spinner
+
+**respinner** wave loader (waiting phase only). Other spinner variants were not copied.
+
 ## Ghost face
 
 Sheet silhouette on the bloub eye rig (`shape="ghost"`). Same 14 poses; the

@@ -14,7 +14,8 @@ import {
 } from '@hermes/plugin-sdk'
 import { useEffect, useRef } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
-import { classifyTool, paintOrb, phaseToOrbState } from './paint'
+import { PresenceHost, pushHermesGateway, pushVoiceBus, toOrbState } from 'presence/host'
+import { classifyTool, paintOrb } from './paint'
 
 const ID = 'thinking-orbs'
 const VOICE_BUS = 'hermes:voice-bus'
@@ -22,8 +23,27 @@ const VOICE_BUS = 'hermes:voice-bus'
 const $state = atom('idle')
 const $preview = atom('')
 
-/** Runtime session id → last orb state. Only the focused session is shown. */
+/** Runtime session id → PresenceHost. Only the focused session is shown. */
 const bySession = new Map()
+
+function hostFor(sid) {
+  const key = sid || ''
+  let next = bySession.get(key)
+  if (!next) {
+    next = new PresenceHost({ audio: 'off' })
+    bySession.set(key, next)
+  }
+  return next
+}
+
+function orbFromHost(presence) {
+  const snap = presence.snapshot
+  if (snap.phase === 'working') return classifyTool(snap.tool?.name)
+  if (snap.phase === 'speaking') return 'composing'
+  const mapped = toOrbState(snap.phase)
+  if (mapped === 'success' || mapped === 'error' || mapped === 'breathing') return 'idle'
+  return mapped
+}
 
 function sessionAtom() {
   return host.state.focusedSessionId || host.state.activeSessionId
@@ -44,15 +64,15 @@ function eventIds(event, payload) {
   return ids.filter((id) => typeof id === 'string' && id.length > 0)
 }
 
-function showFor(sid, next) {
-  if (sid) bySession.set(sid, next)
+function showFor(sid) {
+  const presence = hostFor(sid)
   const focused = currentSid()
-  if (!focused || !sid || sid === focused) $state.set(next)
+  if (!focused || !sid || sid === focused) $state.set(orbFromHost(presence))
 }
 
 function showActive() {
   const focused = currentSid()
-  $state.set((focused && bySession.get(focused)) || 'idle')
+  $state.set(focused ? orbFromHost(hostFor(focused)) : 'idle')
 }
 
 function isDark() {
@@ -148,34 +168,9 @@ function applyEvent(event) {
   const active = currentSid()
   const sid = ids[0] || active || ''
 
-  // Unscoped stream events belong to the focused turn. Scoped events from
-  // other sessions only update the cache so a later switch can show them.
-  const forActive = !ids.length || (active && ids.includes(active))
-
-  if (type === 'session.info' && typeof payload.running === 'boolean') {
-    showFor(sid, payload.running ? bySession.get(sid) || 'thinking' : 'idle')
-    return
-  }
-
-  if (type === 'message.start') {
-    showFor(sid, 'thinking')
-    return
-  }
-  if (type === 'message.delta' || type === 'message.interim') {
-    if (forActive || sid) showFor(sid, 'composing')
-    return
-  }
-  if (type === 'message.complete' || type === 'error') {
-    showFor(sid, 'idle')
-    return
-  }
-  if (type === 'tool.start' || type === 'tool.generating') {
-    showFor(sid, classifyTool(payload.toolName || payload.name || payload.tool || payload.tool_name))
-    return
-  }
-  if (type === 'tool.complete') {
-    showFor(sid, 'thinking')
-  }
+  const presence = hostFor(sid)
+  pushHermesGateway(presence, type, payload)
+  showFor(sid)
 }
 
 function onVoiceBus(event) {
@@ -183,7 +178,9 @@ function onVoiceBus(event) {
   const phase = String(detail.phase || detail.state || '')
   if (!phase) return
   $preview.set('')
-  showFor(currentSid() || '', phaseToOrbState(phase, detail.toolName))
+  const sid = currentSid() || ''
+  pushVoiceBus(hostFor(sid), phase, detail.toolName)
+  showFor(sid)
 }
 
 export default {

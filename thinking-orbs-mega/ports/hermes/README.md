@@ -2,6 +2,8 @@
 
 A Hermes Desktop plugin that paints the megafork `ModeFrame` engine (official nine plus extras). Status-bar chip + a right pane. It observes gateway session events and the native `hermes:voice-bus`. It never opens the microphone.
 
+Each session owns a `PresenceHost`. Gateway + voice-bus events are conversation events; the orb verb is derived from the snapshot (tools still classify as searching/shaping). Rebuild with `npm run build:hermes` so the host is bundled.
+
 Hermes only allows `@hermes/plugin-sdk`, `react`, and `react/jsx-runtime` as imports. `npm run build` (from this folder, or `npm run build:hermes` in the megafork root) bundles the engine into a single `plugin.js`.
 
 ## Install

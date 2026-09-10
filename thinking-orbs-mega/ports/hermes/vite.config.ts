@@ -2,6 +2,11 @@ import { resolve } from 'node:path';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      'presence/host': resolve(__dirname, '../../../presence/src/host/runtime.ts')
+    }
+  },
   build: {
     lib: {
       entry: resolve(__dirname, 'src/plugin.js'),

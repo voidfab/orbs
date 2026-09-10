@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.10.0
+
+- Pi and Hermes drive `PresenceHost` (`presence/host`) so the live turn is the same bus as the gallery.
+- Grok Bot brand ramps + idle motions from grokbot-wall. ttfx matrix/decrypt/waves on the character grid. Cuelume phase cues. boring-avatars identicon fallback. respinner wave on waiting.
+
 ## 0.9.1
 
 - Ghost alert and exclaim carry a real `!` beside the sheet: italic buzzing mark vs upright shout, so they no longer share the wide face.

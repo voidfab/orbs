@@ -7,6 +7,7 @@ import { RAYON } from './bloub/repere';
 import { SHAPE_BY_ID, type ShapeId } from './bloub/skins';
 import { POSES, type StateId } from './bloub/states';
 import { toFaceState } from './map';
+import { grokbotInk, type GrokbotBrandName } from './brand';
 import { faceFrameToSvg, faceTheme, paintFaceFrame } from './paint';
 
 export interface FacePresenceProps {
@@ -22,6 +23,8 @@ export interface FacePresenceProps {
   renderer?: 'canvas' | 'svg';
   reducedMotion?: boolean;
   speed?: number;
+  /** Official Grok Bot brand ink from grokbot-wall. */
+  brand?: GrokbotBrandName;
 }
 
 function resolveDark(theme: 'auto' | 'dark' | 'light'): boolean {
@@ -47,7 +50,8 @@ export function FacePresence({
   static: isStatic = false,
   renderer = 'canvas',
   reducedMotion,
-  speed = 1
+  speed = 1,
+  brand
 }: FacePresenceProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapRef = useRef<HTMLSpanElement>(null);
@@ -80,7 +84,7 @@ export function FacePresence({
       const frame = reduced
         ? new BotEngine(RAYON, stateRef.current, radii).sample(t)
         : engine.sample(t);
-      const colors = faceTheme(dark);
+      const colors = faceTheme(dark, brand ? grokbotInk(brand, dark) : undefined);
       if (renderer === 'svg') {
         svgRef.current = faceFrameToSvg(frame, size, colors);
         const host = wrapRef.current;
@@ -107,7 +111,7 @@ export function FacePresence({
       nowRef.current += dt * speed;
       paint();
     });
-  }, [target, size, dark, paused, reduced, renderer, speed, radii]);
+  }, [target, size, dark, paused, reduced, renderer, speed, radii, brand]);
 
   return (
     <span

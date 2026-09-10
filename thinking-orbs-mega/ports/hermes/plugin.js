@@ -1,6 +1,339 @@
 import { atom, host, STATUSBAR_AREAS, PALETTE_AREA, useValue, Tip } from "@hermes/plugin-sdk";
 import { useRef, useEffect } from "react";
 import { jsx, jsxs } from "react/jsx-runtime";
+const SILENT_DUPLEX = { input: 0, output: 0 };
+const IDLE_FLAGS = {
+  session: false,
+  humanSpeaking: false,
+  agentThinking: false,
+  agentSpeaking: false,
+  asleep: false,
+  error: null,
+  tool: null,
+  turnJustEnded: false
+};
+function clearTurn(flags) {
+  return {
+    ...flags,
+    humanSpeaking: false,
+    agentThinking: false,
+    agentSpeaking: false,
+    tool: null,
+    error: null,
+    turnJustEnded: false
+  };
+}
+function applyEvent$1(flags, event) {
+  switch (event.kind) {
+    case "session.start":
+      return { ...clearTurn(flags), session: true, asleep: false };
+    case "session.end":
+      return { ...IDLE_FLAGS };
+    case "human.start":
+      return {
+        ...flags,
+        session: true,
+        humanSpeaking: true,
+        asleep: false,
+        turnJustEnded: false,
+        error: null
+      };
+    case "human.end":
+      return { ...flags, humanSpeaking: false };
+    case "agent.think":
+      return {
+        ...flags,
+        session: true,
+        agentThinking: true,
+        agentSpeaking: false,
+        asleep: false,
+        turnJustEnded: false,
+        error: null
+      };
+    case "agent.speak":
+      return {
+        ...flags,
+        session: true,
+        agentSpeaking: true,
+        asleep: false,
+        turnJustEnded: false,
+        error: null
+      };
+    case "agent.speak.end":
+      return { ...flags, agentSpeaking: false };
+    case "tool.start":
+      return {
+        ...flags,
+        session: true,
+        tool: { name: event.name, status: "running" },
+        agentThinking: true,
+        asleep: false,
+        turnJustEnded: false,
+        error: null
+      };
+    case "tool.permission":
+      return {
+        ...flags,
+        session: true,
+        tool: { name: event.name, status: "permission" },
+        asleep: false,
+        turnJustEnded: false
+      };
+    case "tool.end":
+      return {
+        ...flags,
+        tool: null,
+        agentThinking: true,
+        error: null
+      };
+    case "tool.error":
+      return {
+        ...flags,
+        tool: null,
+        agentThinking: false,
+        error: event.message ?? `${event.name ?? "tool"} failed`
+      };
+    case "turn.end":
+      return {
+        ...flags,
+        humanSpeaking: false,
+        agentThinking: false,
+        agentSpeaking: false,
+        tool: null,
+        error: null,
+        turnJustEnded: true
+      };
+    case "error":
+      return { ...flags, error: event.message ?? "error", tool: null };
+    case "asleep":
+      return { ...clearTurn(flags), session: flags.session, asleep: true };
+    case "wake":
+      return { ...flags, asleep: false };
+  }
+}
+function phaseFromFlags(flags) {
+  var _a, _b;
+  if (flags.error) return "err";
+  if (flags.asleep && !flags.humanSpeaking && !flags.agentSpeaking && !flags.agentThinking && !flags.tool) {
+    return "asleep";
+  }
+  if (((_a = flags.tool) == null ? void 0 : _a.status) === "permission") return "waiting";
+  if (flags.agentSpeaking) return "speaking";
+  if (flags.humanSpeaking) return "listening";
+  if (((_b = flags.tool) == null ? void 0 : _b.status) === "running") return "working";
+  if (flags.agentThinking) return "thinking";
+  if (flags.turnJustEnded) return "done";
+  return "idle";
+}
+function duplexFromFlags(flags, override) {
+  return {
+    input: (override == null ? void 0 : override.input) ?? (flags.humanSpeaking ? 0.62 : 0),
+    output: (override == null ? void 0 : override.output) ?? (flags.agentSpeaking ? 0.7 : 0)
+  };
+}
+function snapshotFromFlags(flags, override) {
+  return {
+    phase: phaseFromFlags(flags),
+    duplex: duplexFromFlags(flags, override),
+    tool: flags.tool,
+    error: flags.error,
+    session: flags.session
+  };
+}
+const DEFAULTS = {
+  audio: "listen",
+  vadStart: 0.12,
+  vadStop: 0.05,
+  hangoverMs: 220
+};
+class PresenceHost {
+  constructor(opts = {}) {
+    this.flags = { ...IDLE_FLAGS };
+    this.duplex = { ...SILENT_DUPLEX };
+    this.listeners = /* @__PURE__ */ new Set();
+    this.inputUntil = 0;
+    this.outputUntil = 0;
+    this.audio = opts.audio ?? DEFAULTS.audio;
+    this.vadStart = opts.vadStart ?? DEFAULTS.vadStart;
+    this.vadStop = opts.vadStop ?? DEFAULTS.vadStop;
+    this.hangoverMs = opts.hangoverMs ?? DEFAULTS.hangoverMs;
+  }
+  get snapshot() {
+    return snapshotFromFlags(this.flags, this.duplex);
+  }
+  get conversation() {
+    return this.flags;
+  }
+  subscribe(fn) {
+    this.listeners.add(fn);
+    fn(this.snapshot);
+    return () => {
+      this.listeners.delete(fn);
+    };
+  }
+  push(event) {
+    this.flags = applyEvent$1(this.flags, event);
+    return this.emit();
+  }
+  setDuplex(partial) {
+    this.duplex = {
+      input: clamp01$1(partial.input ?? this.duplex.input),
+      output: clamp01$1(partial.output ?? this.duplex.output)
+    };
+    return this.emit();
+  }
+  /**
+   * Feed analyser levels. Always updates the duplex buses. With an audio
+   * policy, rising/falling VAD also becomes conversation events.
+   */
+  ingestAudio(levels, now = nowMs()) {
+    this.duplex = {
+      input: clamp01$1(levels.input),
+      output: clamp01$1(levels.output)
+    };
+    if (this.audio === "off") return this.emit();
+    const inLevel = levels.vad ?? levels.input;
+    this.edge(
+      inLevel,
+      "inputUntil",
+      this.flags.humanSpeaking,
+      { kind: "human.start" },
+      { kind: "human.end" },
+      now
+    );
+    if (this.audio === "duplex") {
+      this.edge(
+        levels.output,
+        "outputUntil",
+        this.flags.agentSpeaking,
+        { kind: "agent.speak" },
+        { kind: "agent.speak.end" },
+        now
+      );
+    }
+    return this.emit();
+  }
+  /**
+   * Hosts that only know a named phase (voice bus, OSC 12) replace flags
+   * to match it. Duplex energy is kept.
+   */
+  adoptPhase(phase, extra) {
+    const tool = (extra == null ? void 0 : extra.tool) && (phase === "working" || phase === "waiting") ? { name: extra.tool, status: phase === "waiting" ? "permission" : "running" } : null;
+    this.flags = {
+      session: phase !== "idle" && phase !== "asleep",
+      humanSpeaking: phase === "listening",
+      agentThinking: phase === "thinking" || phase === "working",
+      agentSpeaking: phase === "speaking",
+      asleep: phase === "asleep",
+      error: (extra == null ? void 0 : extra.error) ?? (phase === "err" ? "error" : null),
+      tool,
+      turnJustEnded: phase === "done"
+    };
+    return this.emit();
+  }
+  reset() {
+    this.flags = { ...IDLE_FLAGS };
+    this.duplex = { ...SILENT_DUPLEX };
+    this.inputUntil = 0;
+    this.outputUntil = 0;
+    return this.emit();
+  }
+  edge(level, untilKey, active, start, stop, now) {
+    if (level >= this.vadStart) {
+      this[untilKey] = now + this.hangoverMs;
+      if (!active) this.flags = applyEvent$1(this.flags, start);
+      return;
+    }
+    if (level > this.vadStop) {
+      this[untilKey] = now + this.hangoverMs;
+      return;
+    }
+    if (active && now >= this[untilKey]) {
+      this.flags = applyEvent$1(this.flags, stop);
+    }
+  }
+  emit() {
+    const snap = this.snapshot;
+    for (const fn of this.listeners) fn(snap);
+    return snap;
+  }
+}
+function clamp01$1(n) {
+  return n < 0 ? 0 : n > 1 ? 1 : n;
+}
+function nowMs() {
+  return typeof performance !== "undefined" ? performance.now() : Date.now();
+}
+function voiceBusToConversation(phase, toolName) {
+  const p = phase.toLowerCase();
+  if (p === "listening" || p === "recording" || p === "transcribing") return { kind: "human.start" };
+  if (p === "speaking" || p === "talking") return { kind: "agent.speak" };
+  if (p === "thinking" || p === "processing" || p === "composing" || p === "streaming") {
+    return { kind: "agent.think" };
+  }
+  if (p === "working" || p === "tool" || p === "searching" || p === "shaping") {
+    return { kind: "tool.start", name: toolName ?? "tool" };
+  }
+  if (p === "waiting" || p === "permission") return { kind: "tool.permission", name: toolName ?? "tool" };
+  if (p === "idle" || p === "done" || p === "success") return { kind: "turn.end" };
+  if (p === "error" || p === "err") return { kind: "error" };
+  if (p === "asleep") return { kind: "asleep" };
+  return null;
+}
+function toOrbState(phase) {
+  if (phase === "listening") return "listening";
+  if (phase === "thinking") return "thinking";
+  if (phase === "working") return "working";
+  if (phase === "waiting") return "waiting";
+  if (phase === "speaking") return "speaking";
+  if (phase === "done") return "success";
+  if (phase === "err") return "error";
+  if (phase === "asleep") return "breathing";
+  return "idle";
+}
+function ensureSession(host2) {
+  if (!host2.conversation.session) host2.push({ kind: "session.start" });
+}
+function pushHermesGateway(host2, type, payload = {}) {
+  const t = String(type || "");
+  if (t === "thinking.delta") return host2.snapshot;
+  if (t === "session.info") {
+    if (payload.running === true) {
+      ensureSession(host2);
+      return host2.snapshot;
+    }
+    if (payload.running === false) return host2.push({ kind: "session.end" });
+    return host2.snapshot;
+  }
+  if (t === "message.start") {
+    ensureSession(host2);
+    return host2.push({ kind: "agent.think" });
+  }
+  if (t === "message.delta" || t === "message.interim") {
+    ensureSession(host2);
+    return host2.push({ kind: "agent.speak" });
+  }
+  if (t === "message.complete") return host2.push({ kind: "turn.end" });
+  if (t === "error") return host2.push({ kind: "error" });
+  if (t === "tool.start" || t === "tool.generating") {
+    const name = String(
+      payload.toolName ?? payload.name ?? payload.tool ?? payload.tool_name ?? "tool"
+    );
+    ensureSession(host2);
+    return host2.push({ kind: "tool.start", name });
+  }
+  if (t === "tool.complete") {
+    host2.push({ kind: "tool.end" });
+    return host2.push({ kind: "agent.think" });
+  }
+  return host2.snapshot;
+}
+function pushVoiceBus(host2, phase, toolName) {
+  const conv = voiceBusToConversation(phase, toolName);
+  if (!conv) return host2.snapshot;
+  if (conv.kind !== "session.end" && conv.kind !== "asleep") ensureSession(host2);
+  return host2.push(conv);
+}
 function lerp(a, b, f) {
   return a + (b - a) * f;
 }
@@ -3624,18 +3957,6 @@ function paintOrb(ctx, size, state, timeSeconds, dark) {
   ctx.clearRect(0, 0, size, size);
   draw(ctx, size, timeSeconds * speed, dark, opts);
 }
-function phaseToOrbState(phase, toolName) {
-  const p = phase.toLowerCase();
-  if (p === "listening" || p === "recording" || p === "transcribing") return "listening";
-  if (p === "speaking" || p === "talking") return "speaking";
-  if (p === "thinking" || p === "processing") return "thinking";
-  if (p === "composing" || p === "streaming") return "composing";
-  if (p === "searching" || p === "reading") return "searching";
-  if (p === "shaping" || p === "writing" || p === "editing") return "shaping";
-  if (p === "working" || p === "tool") return classifyTool(toolName);
-  if (p === "relaying") return "relaying";
-  return "idle";
-}
 function classifyTool(toolName) {
   const name = (toolName ?? "").toLowerCase();
   if (["edit", "write", "apply_patch", "str_replace"].some((n) => name.includes(n))) {
@@ -3653,6 +3974,24 @@ const VOICE_BUS = "hermes:voice-bus";
 const $state = atom("idle");
 const $preview = atom("");
 const bySession = /* @__PURE__ */ new Map();
+function hostFor(sid) {
+  const key = sid || "";
+  let next = bySession.get(key);
+  if (!next) {
+    next = new PresenceHost({ audio: "off" });
+    bySession.set(key, next);
+  }
+  return next;
+}
+function orbFromHost(presence) {
+  var _a;
+  const snap = presence.snapshot;
+  if (snap.phase === "working") return classifyTool((_a = snap.tool) == null ? void 0 : _a.name);
+  if (snap.phase === "speaking") return "composing";
+  const mapped = toOrbState(snap.phase);
+  if (mapped === "success" || mapped === "error" || mapped === "breathing") return "idle";
+  return mapped;
+}
 function sessionAtom() {
   return host.state.focusedSessionId || host.state.activeSessionId;
 }
@@ -3668,14 +4007,14 @@ function eventIds(event, payload) {
   const ids = [event.session_id, payload.session_id, payload.stored_session_id];
   return ids.filter((id) => typeof id === "string" && id.length > 0);
 }
-function showFor(sid, next) {
-  if (sid) bySession.set(sid, next);
+function showFor(sid) {
+  const presence = hostFor(sid);
   const focused = currentSid();
-  if (!focused || !sid || sid === focused) $state.set(next);
+  if (!focused || !sid || sid === focused) $state.set(orbFromHost(presence));
 }
 function showActive() {
   const focused = currentSid();
-  $state.set(focused && bySession.get(focused) || "idle");
+  $state.set(focused ? orbFromHost(hostFor(focused)) : "idle");
 }
 function isDark() {
   var _a, _b;
@@ -3762,37 +4101,18 @@ function applyEvent(event) {
   const ids = eventIds(event, payload);
   const active = currentSid();
   const sid = ids[0] || active || "";
-  const forActive = !ids.length || active && ids.includes(active);
-  if (type === "session.info" && typeof payload.running === "boolean") {
-    showFor(sid, payload.running ? bySession.get(sid) || "thinking" : "idle");
-    return;
-  }
-  if (type === "message.start") {
-    showFor(sid, "thinking");
-    return;
-  }
-  if (type === "message.delta" || type === "message.interim") {
-    if (forActive || sid) showFor(sid, "composing");
-    return;
-  }
-  if (type === "message.complete" || type === "error") {
-    showFor(sid, "idle");
-    return;
-  }
-  if (type === "tool.start" || type === "tool.generating") {
-    showFor(sid, classifyTool(payload.toolName || payload.name || payload.tool || payload.tool_name));
-    return;
-  }
-  if (type === "tool.complete") {
-    showFor(sid, "thinking");
-  }
+  const presence = hostFor(sid);
+  pushHermesGateway(presence, type, payload);
+  showFor(sid);
 }
 function onVoiceBus(event) {
   const detail = (event == null ? void 0 : event.detail) && typeof event.detail === "object" ? event.detail : {};
   const phase = String(detail.phase || detail.state || "");
   if (!phase) return;
   $preview.set("");
-  showFor(currentSid() || "", phaseToOrbState(phase, detail.toolName));
+  const sid = currentSid() || "";
+  pushVoiceBus(hostFor(sid), phase, detail.toolName);
+  showFor(sid);
 }
 const plugin = {
   id: ID,

@@ -11,6 +11,7 @@ import {
   GlyphPresence,
   IDENTITY_EXPRESSIONS,
   IdentityPresence,
+  playPhaseCue,
   MeterPresence,
   OrbPresence,
   PHASE_LABELS,
@@ -81,13 +82,15 @@ function PresenceStage({
   size,
   theme,
   paused,
-  who
+  who,
+  identicon
 }: {
   snapshot: PresenceSnapshot;
   size: number;
   theme: 'dark' | 'light';
   paused: boolean;
   who: string;
+  identicon?: boolean;
 }) {
   const dark = theme === 'dark';
   return (
@@ -119,8 +122,13 @@ function PresenceStage({
       </div>
       <div className="realm">
         <strong>Identity</strong>
-        <IdentityPresence name={who} snapshot={snapshot} size={size} />
-        <div className="meta">blobatar · {who}</div>
+        <IdentityPresence
+          name={who}
+          snapshot={snapshot}
+          size={size}
+          variant={identicon ? 'identicon' : 'blobatar'}
+        />
+        <div className="meta">{identicon ? 'identicon' : 'blobatar'} · {who}</div>
       </div>
       <div className="realm">
         <strong>Meter</strong>
@@ -171,6 +179,8 @@ export function ReviewApp() {
   const [identityExpr, setIdentityExpr] = useState<IdentityExpressionId>('idle');
   const [who, setWho] = useState('presence');
   const [paused, setPaused] = useState(boot.paused);
+  const [cues, setCues] = useState(false);
+  const [identicon, setIdenticon] = useState(false);
 
   const hostRef = useRef<PresenceHost | null>(null);
   if (!hostRef.current) {
@@ -224,6 +234,11 @@ export function ReviewApp() {
 
   const stageSnapshot = tab === 'live' ? liveSnapshot : snapshot;
 
+  useEffect(() => {
+    if (!cues || paused) return;
+    playPhaseCue(stageSnapshot.phase);
+  }, [cues, paused, stageSnapshot.phase]);
+
   return (
     <>
       <header>
@@ -266,6 +281,14 @@ export function ReviewApp() {
         <label>
           who
           <input value={who} onChange={(e) => setWho(e.target.value)} style={{ width: 120 }} />
+        </label>
+        <label>
+          <input type="checkbox" checked={cues} onChange={(e) => setCues(e.target.checked)} />
+          cues
+        </label>
+        <label>
+          <input type="checkbox" checked={identicon} onChange={(e) => setIdenticon(e.target.checked)} />
+          identicon
         </label>
       </div>
 
@@ -325,7 +348,7 @@ export function ReviewApp() {
               {playing ? ` · t=${playT.toFixed(1)}s` : ''}
             </span>
           </div>
-          <PresenceStage snapshot={stageSnapshot} size={size} theme={theme} paused={paused} who={who} />
+          <PresenceStage snapshot={stageSnapshot} size={size} theme={theme} paused={paused} who={who} identicon={identicon} />
         </>
       ) : tab === 'live' ? (
         <>
@@ -408,7 +431,7 @@ export function ReviewApp() {
               {audio.status.error ? ` · ${audio.status.error}` : ''}
             </span>
           </div>
-          <PresenceStage snapshot={stageSnapshot} size={size} theme={theme} paused={paused} who={who} />
+          <PresenceStage snapshot={stageSnapshot} size={size} theme={theme} paused={paused} who={who} identicon={identicon} />
         </>
       ) : tab === 'catalog' ? (
         <>
@@ -454,7 +477,13 @@ export function ReviewApp() {
               className={identityExpr === id ? 'cell sel' : 'cell'}
               onClick={() => setIdentityExpr(id)}
             >
-              <IdentityPresence name={who} expression={IDENTITY_EXPRESSIONS[id]} size={88} title={`${who} · ${id}`} />
+              <IdentityPresence
+                name={who}
+                expression={IDENTITY_EXPRESSIONS[id]}
+                size={88}
+                title={`${who} · ${id}`}
+                variant={identicon ? 'identicon' : 'blobatar'}
+              />
               <span className="name">{id}</span>
             </button>
           ))}

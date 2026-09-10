@@ -4,6 +4,12 @@ Dated checkpoint history. Appended by `handoff-create`. Newest entries on top.
 
 ---
 
+## 2026-09-10  ·  presence 0.10.0
+
+- Pi and Hermes consume PresenceHost. grokbot-wall brand, ttfx matrix/decrypt/waves, Cuelume cues, identicon, waiting spinner.
+- DAW + demoscene zips moved `_new/` → `_later/`.
+
+
 ## 2026-09-10  ·  publish checkpoint
 
 - Logged presence 0.1.0–0.9.1 and megafork SVG/Hermes fixes in root CHANGELOG, README, HANDOFF, REALMS.

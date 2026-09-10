@@ -5,6 +5,7 @@ import { subscribe } from '../clock';
 import { glyphFor } from './icons';
 import { morphD } from './morph';
 import { Spring } from './morphicons/core/spring';
+import { WaveSpinner } from './spinner';
 
 export function GlyphPresence({
   snapshot,
@@ -43,6 +44,9 @@ export function GlyphPresence({
   }, [paused]);
 
   const stroke = dark ? '#e8e8ea' : '#161616';
+  if (phase === 'waiting') {
+    return <WaveSpinner size={size} color={stroke} />;
+  }
   return (
     <svg
       width={size}

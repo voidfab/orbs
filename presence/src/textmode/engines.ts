@@ -13,6 +13,7 @@ import {
   type CastRgb
 } from './cast';
 import { TEXTMODE_RAMP, emptyGrid, setCell, type CharacterGrid } from './grid';
+import { paintDecrypt, paintMatrix, paintWaves, type TtfxEngine } from './ttfx';
 
 const WORLD = 28;
 const DIRS: Array<readonly [number, number, number]> = [
@@ -238,14 +239,24 @@ export function paintField(grid: CharacterGrid, snapshot: PresenceSnapshot, t: n
   }
 }
 
-export function resolveEngine(engine: CastEngine | 'auto', phase: PresenceSnapshot['phase']): CastEngine {
+export type TextmodeEngine = CastEngine | TtfxEngine | 'auto';
+
+export function resolveEngine(engine: TextmodeEngine, phase: PresenceSnapshot['phase']): CastEngine | TtfxEngine {
   return engine === 'auto' ? autoCastEngine(phase) : engine;
 }
 
-export function paintEngine(grid: CharacterGrid, snapshot: PresenceSnapshot, t: number, engine: CastEngine): void {
+export function paintEngine(
+  grid: CharacterGrid,
+  snapshot: PresenceSnapshot,
+  t: number,
+  engine: CastEngine | TtfxEngine
+): void {
   if (engine === 'seal') paintSeal(grid, snapshot, t);
   else if (engine === 'hyphae') paintHyphae(grid, snapshot, t);
   else if (engine === 'beat') paintBeat(grid, snapshot, t);
+  else if (engine === 'matrix') paintMatrix(grid, snapshot, t);
+  else if (engine === 'decrypt') paintDecrypt(grid, snapshot, t);
+  else if (engine === 'waves') paintWaves(grid, snapshot, t);
   else paintField(grid, snapshot, t);
 }
 
@@ -254,7 +265,7 @@ export function textmodeGrid(
   t: number,
   cols?: number,
   rows?: number,
-  engine: CastEngine | 'auto' = 'auto'
+  engine: TextmodeEngine = 'auto'
 ): CharacterGrid {
   const resolved = resolveEngine(engine, snapshot.phase);
   const w = cols ?? (resolved === 'field' ? 12 : 20);

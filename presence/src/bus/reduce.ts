@@ -4,7 +4,7 @@ import {
   type PresencePhase,
   type PresenceSnapshot,
   type ToolActivity
-} from './types';
+} from './types.ts';
 
 /**
  * Full-duplex conversation + agentic tool use.

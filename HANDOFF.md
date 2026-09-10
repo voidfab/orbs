@@ -19,7 +19,7 @@ Read the files listed in `.handoff/config.yaml` under `project.readingOrder`.
 | Megafork publish | ✓ | Public `voidfab/orbs` on `master` |
 | `_new/` harvest | ✓ | Presence 0.9.1: bus, Face, Ghost, Echo, orb, CSS orb, identity, glyph, meter, glow, textmode, braille, terminal |
 | Pi + Hermes plugins | ✓ | Installed locally; Hermes pane session-lock is upstream (ORBS-57c93e, low) |
-| Realms expansion | ◐ | Painters + `PresenceHost` on the bus. Next: Pi/Hermes consume the host, not only orb verbs. |
+| Realms expansion | ◐ | Painters + PresenceHost. Pi/Hermes now drive the host. Epic open until verified in those apps. |
 
 ---
 
@@ -27,25 +27,26 @@ Read the files listed in `.handoff/config.yaml` under `project.readingOrder`.
 
 Canonical tree is `thinking-orbs-mega/` plus sibling `presence/` (bus + painters + PresenceHost). `_new/` is gitignored.
 
-Presence 0.9.1: Ghost wears every catalog pose (sheet body + two eyes; italic vs upright `!` on alert/exclaim). Echo is the afterimage. ghostty-web not vendored. Ready to land on `master`.
+Presence 0.10.0: Pi and Hermes drive PresenceHost. Grokbot brand, ttfx grid verbs, Cuelume cues, identicon, waiting spinner. DAW/demoscene parked in `_later/`.
 
 <!-- handoff:state-notes -->
-Ghost is `FacePresence shape="ghost"`. Blob poses modulate the sheet; thinking keeps dots; alert/exclaim carry a `!` beside the sheet (italic vs upright). Pi/Hermes still paint orb verbs only.
+Pi and Hermes push ConversationEvents into PresenceHost; orb verbs are derived from the snapshot. Remaining `_new/` is WATCH/DEMO/SKIP.
 <!-- /handoff:state-notes -->
 
 <!-- /handoff:state -->
 
 <!-- handoff:recent -->
 
-- Presence 0.1.0–0.9.1 + megafork SVG/Hermes fixes logged and ready to commit.
-- Closed ORBS-dd5884. Presence tests 71/71, megafork 30/30.
+- Closed ORBS-dc948a: Pi and Hermes drive PresenceHost.
+- Harvested grokbot-wall brand, ttfx verbs, Cuelume cues, identicon, waiting spinner.
+- DAW/demoscene parked in `_later/`. Presence tests 77/77.
 
 <!-- /handoff:recent -->
 
 <!-- handoff:next -->
 
-- ORBS-dc948a — Pi and Hermes consume PresenceHost, not only orb verbs.
-- Epic ORBS-0a94c4 stays open until those hosts ride the same bus as the gallery.
+- Epic ORBS-0a94c4 can close once Pi/Hermes host wiring is verified in those apps.
+- Optional later: omacy screensaver host, native Swift ports, hydra/sigils demos.
 
 <!-- /handoff:next -->
 
@@ -53,7 +54,7 @@ Ghost is `FacePresence shape="ghost"`. Blob poses modulate the sheet; thinking k
 
 ## Gotchas
 
-- `_new/` and `_processed/` stay local. Never commit zip drops or `node_modules` under ports. Harvested zips move `_new/` → `_processed/`.
+- `_new/`, `_processed/`, and `_later/` stay local. Never commit zip drops. Harvested zips → `_processed/`. DAW/demoscene → `_later/`.
 - SVG mode must observe the wrapper, not the hidden canvas, or the morph clock stops.
 - The full SVG review grid (all 49 orbs) is expensive once that clock is alive. Boot `?renderer=svg&state=working&solo=1` for a single morphing orb.
 - Aurora's zip/GitHub have no LICENSE. Presence glow copies only mood/palette tables as CSS; never the Metal shader.

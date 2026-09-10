@@ -2,6 +2,8 @@
 _new/
 # Already harvested zip drops (stay local).
 _processed/
+# Parked DAW / demoscene drops to look at later.
+_later/
 
 # Local / machine junk
 .DS_Store

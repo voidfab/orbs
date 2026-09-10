@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { piActivityToConversation, voiceBusToConversation } from '../bus/map';
+import { pushHermesGateway, pushPiActivity, pushVoiceBus } from '../host/drive';
 import { PresenceHost } from '../host/PresenceHost';
 import { claudeHookToConversation } from '../terminal/osc';
 
@@ -96,5 +97,29 @@ describe('live host adapters', () => {
     expect(voiceBusToConversation('listening')?.kind).toBe('human.start');
     expect(voiceBusToConversation('talking')?.kind).toBe('agent.speak');
     expect(voiceBusToConversation('working', 'Read')?.kind).toBe('tool.start');
+  });
+
+  it('Pi activity drives PresenceHost including a session start', () => {
+    const host = new PresenceHost({ audio: 'off' });
+    pushPiActivity(host, { type: 'agent_started' });
+    expect(host.snapshot.phase).toBe('thinking');
+    pushPiActivity(host, { type: 'tool_started', id: '1', toolName: 'Bash' });
+    expect(host.snapshot.phase).toBe('working');
+    expect(host.snapshot.tool?.name).toBe('Bash');
+    pushPiActivity(host, { type: 'agent_settled' });
+    expect(host.snapshot.phase).toBe('done');
+  });
+
+  it('Hermes gateway events drive PresenceHost', () => {
+    const host = new PresenceHost({ audio: 'off' });
+    pushHermesGateway(host, 'message.start');
+    expect(host.snapshot.phase).toBe('thinking');
+    pushHermesGateway(host, 'tool.start', { toolName: 'Read' });
+    expect(host.snapshot.phase).toBe('working');
+    expect(host.snapshot.tool?.name).toBe('Read');
+    pushHermesGateway(host, 'message.complete');
+    expect(host.snapshot.phase).toBe('done');
+    pushVoiceBus(host, 'listening');
+    expect(host.snapshot.phase).toBe('listening');
   });
 });

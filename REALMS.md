@@ -44,7 +44,7 @@ A filled body + two eyes. State is a **pose**, not a particle field. This is the
 | Artifact | Verdict | Why |
 |---|---|---|
 | `bloub-main` | **EXTRACT** (first face harvest) | SVG recreation of the xAI bot: **one black silhouette** + **two white eyes**, 14 catalog states measured off the reference video. States: `idle, thinking, wink, wide, alert, notify, exclaim, sleep, egg, hexagon, play, orbit, burst, comet` (+ `swirl` as UI-only). Engine is pose interpolation (`Pose` → silhouette radii, gaze, eye capsules, dots/arcs). No animation library. MIT. Repo: `jeremy-prt/bloub`. |
-| `grokbot-wall-main` | **EXTRACT** silhouettes + brand ramps | Eight official Grok Bot SDFs (`circle, egg, squircle, pill, triangle, hexagon, cloud, drop`) with per-form motion (`float, roll, tumble, rock, bounce, sway, drift, drip`) and brand colours (WHITE/BROWN/RED/…/GREY). The meetup wall, Luma, and email queue are product — skip. The SDF table + ASCII/WebGL character-grid pass is the visual. |
+| `grokbot-wall-main` | **EXTRACT** silhouettes + brand ramps | **Landed:** brand hexes, idle motions, form→bloub shape map. Meetup wall / Luma / email queue skipped. ASCII/WebGL shader not copied. |
 | `grok-bot-0.18-reconstructed-main` | **WATCH** host | Unofficial reconstruction of the shipped macOS Grok Bot app. Too much product chrome to extract; use as a **reference for official poses**, not a source tree. |
 | `blobatar-main` | **EXTRACT** identity layer | Deterministic geometric “blobatar” from any name. Silhouettes gen1 `round/organic/boxy/nub/cloud/sun`, gen2 adds `capsule/triangle/hexagon/droplet`. Expressions are a **separate axis** from idle breath: `idle, happy, sad, mad, surprised, wink, sleepy, smug, unsure, scared, love, shy, sick, thinking`. Pose-only — never adds a mouth. MIT. This is **who**, not **what the agent is doing**. |
 | `boring-avatars-master` | **VENDOR** identicon | SVG from username + palette. No state. Fine as a fallback identity mark. |
@@ -142,7 +142,7 @@ Seam already analyses RMS / bands / onset. If we need a better analyser, **wavef
 
 Usable package: [`presence/`](presence/). Review: `cd presence && npm run review` → http://127.0.0.1:5188/review.html
 
-Harvested zip drops (bloub, blobatar, orbz, morphicons, claude-terminal-face, waveform-component, textmode.js, cliamp meters, hitch-face, agentpet, Aurora) now live in `_processed/`.
+Harvested zip drops live in `_processed/`. DAW and demoscene archives live in `_later/` (look at later).
 
 | # | Item | Status |
 |---|---|---|
@@ -159,6 +159,11 @@ Harvested zip drops (bloub, blobatar, orbz, morphicons, claude-terminal-face, wa
 | 11 | cliamp braille meters | **landed** in `presence/src/braille` (needles / leds / sines) |
 | 12 | Echo afterimage | **landed** in `presence/src/echo` (lagged snapshot; Cast or TTY skin) |
 | 13 | Ghost sheet face | **landed** — `GhostPresence` / `shape="ghost"`; all 14 catalog poses; alert/exclaim `!` marks |
+| 14 | grokbot-wall brand + motion | **landed** in `presence/src/face/brand.ts` |
+| 15 | ttfx text-field verbs | **landed** matrix / decrypt / waves on the portable grid |
+| 16 | Cuelume phase cues | **landed** in `presence/src/cue` |
+| 17 | boring-avatars identicon | **landed** as IdentityPresence `variant="identicon"` |
+| 18 | respinner wave | **landed** on Glyph waiting |
 
 Sidecar demos (playable, not engine): hydra backdrop, ENTHEA, audiotype, grokbot-wall ASCII pass.
 
