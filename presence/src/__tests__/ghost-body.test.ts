@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { BotEngine } from '../face/bloub/engine';
+import { ghostHover } from '../face/bloub/ghostHover';
 import { RAYON } from '../face/bloub/repere';
 import { toPoints } from '../face/bloub/shape';
 import { SHAPE_BY_ID, SHAPES } from '../face/bloub/skins';
@@ -99,5 +100,28 @@ describe('ghost sheet body', () => {
     expect(alertBar?.dScale).toBe(RAYON);
     expect(exclaimBar?.dScale).toBe(RAYON);
     expect(alert.bodyPath).not.toBe(exclaim.bodyPath);
+  });
+
+  it('hovers on idle and listening, not on pose-owned silhouettes', () => {
+    const rest = SHAPE_BY_ID.get('ghost')!.radii;
+    const atRest = ghostHover(rest, 0);
+    expect(atRest.radii).toEqual(rest);
+    expect(atRest.cy).toBe(0);
+    expect(atRest.sx).toBe(1);
+    const waving = ghostHover(rest, 1);
+    expect(waving.radii).not.toEqual(rest);
+    expect(waving.cy).not.toBe(0);
+
+    const radii = rest;
+    const idle0 = new BotEngine(RAYON, 'idle', radii).sample(0);
+    const idle1 = new BotEngine(RAYON, 'idle', radii).sample(1);
+    expect(idle1.bodyPath).not.toBe(idle0.bodyPath);
+    const burst0 = new BotEngine(RAYON, 'burst', radii).sample(0);
+    expect(burst0.bodyPath).toBe(idle0.bodyPath);
+
+    const think0 = new BotEngine(RAYON, 'thinking', radii).sample(0);
+    const think1 = new BotEngine(RAYON, 'thinking', radii).sample(1);
+    expect(think0.dots.length).toBe(3);
+    expect(think1.dots.length).toBe(3);
   });
 });

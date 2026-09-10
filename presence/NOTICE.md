@@ -120,9 +120,11 @@ palette and DOM `bind()` helper were not copied.
 ## Ghost face
 
 Sheet silhouette on the bloub eye rig (`shape="ghost"`). Same 14 poses; the
-body is a draped head + scalloped hem instead of the ball. Blob poses
-modulate the sheet. Thinking keeps three dots above the head. Alert is an
-italic buzzing `!`; exclaim is an upright shout.
+body is a draped head + scalloped hem instead of the ball. Idle and listening
+hover (traveling hem, bob, squash) follow the motion of a reference mascot
+loop; blink stays the bloub lid calendar. Blob poses modulate the sheet.
+Thinking keeps three dots above the head. Alert is an italic buzzing `!`;
+exclaim is an upright shout.
 
 ## Live host
 

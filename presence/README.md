@@ -43,7 +43,7 @@ is independent of the named phase, matching Conversation Seam.
 | Realm | What it is |
 |---|---|
 | Face | Vendored [bloub](https://github.com/jeremy-prt/bloub) pose engine (14 Grok-measured states). Default body is the ball. |
-| Ghost | Face variant: same two eyes on a sheet body (`GhostPresence` / `shape="ghost"`). Wears all 14 catalog poses. Alert/exclaim keep a `!` beside the sheet. |
+| Ghost | Face variant: same two eyes on a sheet body (`GhostPresence` / `shape="ghost"`). Idle/listening hover (traveling hem). Wears all 14 catalog poses. Alert/exclaim keep a `!` beside the sheet. |
 | Orb | Maps onto `thinking-orbs-mega` verbs (`waiting` → `waiting`, `err` → `error`, …) |
 | CSS orb | Orbz layered WAAPI orb (not dots) |
 | Identity | Vendored [blobatar](https://github.com/Alain00/blobatar) — who, with a bus expression |

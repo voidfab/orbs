@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.1
+
+- Ghost idle / listening hover from `deja-mascot.gif`: traveling hem, bob, squash. Blink stays the existing lid calendar. Pose-owned silhouettes (thinking dots, egg, burst, …) are unchanged.
+
 ## 0.10.0
 
 - Pi and Hermes drive `PresenceHost` (`presence/host`) so the live turn is the same bus as the gallery.

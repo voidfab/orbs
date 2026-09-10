@@ -17,6 +17,7 @@ import {
 } from './decor'
 import { EYE_H, EYE_SPLIT, EYE_W, REST_GAZE, type HeadGaze } from './face'
 import { TAU, clamp, easings } from './math'
+import { ghostHover } from './ghostHover'
 import {
   capsulePath,
   circle,
@@ -26,6 +27,7 @@ import {
   silhouette,
   type Silhouette
 } from './shape'
+import { SHAPE_BY_ID } from './skins'
 
 export interface EyeCfg {
   /** largeur locale (axe court de la gelule), en unites de rayon de boule */
@@ -273,7 +275,20 @@ function bangMark(kind: 'alert' | 'exclaim', t: number): DotRender[] {
 export function applyShapeWear(def: StateDef, pose: Pose, shape: number[], t: number): Pose {
   const wear = shapeWearOf(def)
   if (wear === 'replace') {
-    return { ...pose, sil: { ...pose.sil, radii: shape } }
+    const hover =
+      (def.id === 'idle' || def.id === 'wide') && shape === SHAPE_BY_ID.get('ghost')?.radii
+        ? ghostHover(shape, t)
+        : null
+    return {
+      ...pose,
+      sil: {
+        ...pose.sil,
+        radii: hover?.radii ?? shape,
+        cy: pose.sil.cy + (hover?.cy ?? 0),
+        sx: pose.sil.sx * (hover?.sx ?? 1),
+        sy: pose.sil.sy * (hover?.sy ?? 1)
+      }
+    }
   }
   if (wear === 'modulate') {
     return {

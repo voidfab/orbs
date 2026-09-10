@@ -52,6 +52,7 @@ export { toFaceState } from './face/map';
 export { BotEngine } from './face/bloub/engine';
 export { SEQUENCE, STATES, STATE_BY_ID, POSES, type StateId } from './face/bloub/states';
 export { SHAPE_BY_ID, SHAPES, type ShapeId } from './face/bloub/skins';
+export { ghostHover, GHOST_HOVER_PERIOD } from './face/bloub/ghostHover';
 export { RAYON, DEMI_VIEWBOX } from './face/bloub/repere';
 
 export { MeterPresence } from './meter/MeterPresence';

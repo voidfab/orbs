@@ -1,6 +1,6 @@
 {
   "name": "presence",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "description": "Shared agentic-state bus and visualization realms for full-duplex human↔agent conversation with tool use. Face (incl. sheet ghost), orb, glow, identity, glyph, meter, textmode, echo, braille, terminal.",
   "type": "module",
   "main": "dist/index.cjs",
