@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.11.0
+
+- Hypercube thinking skin (tesseract + Gray comet) from gianlucamazza/hypercube.
+- Googly pupils follow duplex. Name-gradient identity variant.
+
 ## 0.10.1
 
 - Ghost idle / listening hover from `deja-mascot.gif`: traveling hem, bob, squash. Blink stays the existing lid calendar. Pose-owned silhouettes (thinking dots, egg, burst, …) are unchanged.

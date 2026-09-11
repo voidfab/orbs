@@ -3,6 +3,7 @@ import type { PresenceSnapshot } from '../bus/types';
 import { PHASE_LABELS } from '../bus/types';
 import { blobatar } from './blobatar/blobatar';
 import type { Expression } from './blobatar/expression';
+import { gradientSvg } from './gradient';
 import { identiconSvg } from './identicon';
 import { toIdentityExpression } from './map';
 
@@ -15,7 +16,7 @@ export interface IdentityPresenceProps {
   size?: number;
   title?: string;
   /** `identicon` is the boring-avatars marble fallback. */
-  variant?: 'blobatar' | 'identicon';
+  variant?: 'blobatar' | 'identicon' | 'gradient';
 }
 
 export function IdentityPresence({
@@ -29,6 +30,7 @@ export function IdentityPresence({
   const pose = expression ?? (snapshot ? toIdentityExpression(snapshot.phase) : undefined);
   const svg = useMemo(() => {
     if (variant === 'identicon') return identiconSvg(name, size);
+    if (variant === 'gradient') return gradientSvg(name, size);
     return blobatar(name, {
       size,
       expression: pose,

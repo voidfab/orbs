@@ -2,6 +2,9 @@ import { describe, expect, it } from 'vitest';
 import { IDLE_SNAPSHOT } from '../bus/types';
 import { cueForPhase } from '../cue/play';
 import { GROKBOT_BRAND, GROKBOT_FORM_SHAPE, grokbotMotion } from '../face/brand';
+import { lookVector } from '../face/googly';
+import { grayCode, hamming, hypercube, project4to2 } from '../hypercube/cube';
+import { gradientSvg } from '../identity/gradient';
 import { identiconSvg } from '../identity/identicon';
 import { textmodeGrid } from '../textmode/engines';
 import { TTFX_EFFECTS, autoTtfxEngine } from '../textmode/ttfx';
@@ -39,6 +42,30 @@ describe('cuelume harvest', () => {
   });
 });
 
+describe('hypercube harvest', () => {
+  it('builds a 4-cube with a Gray Hamiltonian cycle', () => {
+    const g = hypercube(4);
+    expect(g.vertices).toHaveLength(16);
+    expect(g.edges).toHaveLength(32);
+    const gray = grayCode(4);
+    expect(gray).toHaveLength(16);
+    for (let i = 0; i < gray.length; i++) {
+      expect(hamming(gray[i]!, gray[(i + 1) % gray.length]!)).toBe(1);
+    }
+    const p = project4to2(g.vertices[0]!);
+    expect(Number.isFinite(p.x + p.y + p.depth)).toBe(true);
+  });
+});
+
+describe('googly harvest', () => {
+  it('ramps look instead of slamming to the rim', () => {
+    const near = lookVector(2, 0, 48);
+    expect(near.x).toBeLessThan(0.1);
+    const far = lookVector(400, 0, 48);
+    expect(far.x).toBeCloseTo(1, 5);
+  });
+});
+
 describe('boring-avatars harvest', () => {
   it('emits a deterministic marble identicon for a name', () => {
     const a = identiconSvg('alice', 64);
@@ -48,6 +75,14 @@ describe('boring-avatars harvest', () => {
     expect(a).not.toBe(c);
     expect(a.startsWith('<svg')).toBe(true);
     expect(a.includes('NaN')).toBe(false);
+  });
+});
+
+describe('avatar gradient harvest', () => {
+  it('emits a deterministic triad gradient for a name', () => {
+    expect(gradientSvg('alice', 64)).toBe(gradientSvg('alice', 64));
+    expect(gradientSvg('alice', 64)).not.toBe(gradientSvg('bob', 64));
+    expect(gradientSvg('alice', 64).includes('linearGradient')).toBe(true);
   });
 });
 

@@ -9,6 +9,8 @@ import {
   GhostPresence,
   GlowPresence,
   GlyphPresence,
+  GooglyPresence,
+  HypercubePresence,
   IDENTITY_EXPRESSIONS,
   IdentityPresence,
   playPhaseCue,
@@ -129,6 +131,16 @@ function PresenceStage({
           variant={identicon ? 'identicon' : 'blobatar'}
         />
         <div className="meta">{identicon ? 'identicon' : 'blobatar'} · {who}</div>
+      </div>
+      <div className="realm">
+        <strong>Hypercube</strong>
+        <HypercubePresence snapshot={snapshot} size={size} dark={dark} paused={paused} />
+        <div className="meta">tesseract · Gray comet</div>
+      </div>
+      <div className="realm">
+        <strong>Googly</strong>
+        <GooglyPresence snapshot={snapshot} size={size} dark={dark} paused={paused} />
+        <div className="meta">pupils follow duplex</div>
       </div>
       <div className="realm">
         <strong>Meter</strong>

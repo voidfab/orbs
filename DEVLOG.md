@@ -4,6 +4,12 @@ Dated checkpoint history. Appended by `handoff-create`. Newest entries on top.
 
 ---
 
+## 2026-09-10  ·  presence 0.11.0
+
+- Hypercube thinking skin (tesseract + Gray comet). Googly pupils. Name-gradient identity.
+- Presence tests 81/81.
+
+
 ## 2026-09-10  ·  presence 0.10.0
 
 - Pi and Hermes consume PresenceHost. grokbot-wall brand, ttfx matrix/decrypt/waves, Cuelume cues, identicon, waiting spinner.

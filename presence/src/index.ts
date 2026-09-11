@@ -39,6 +39,8 @@ export {
 
 export { FacePresence, type FacePresenceProps } from './face/FacePresence';
 export { GhostPresence } from './face/GhostPresence';
+export { GooglyPresence } from './face/GooglyPresence';
+export { lookVector, stepSpring } from './face/googly';
 export {
   GROKBOT_BRAND,
   GROKBOT_FORM_MOTION,
@@ -87,6 +89,7 @@ export {
 export { blobatar } from './identity/blobatar/blobatar';
 export { normalizeSeed } from './identity/blobatar/hash';
 export { identiconSvg } from './identity/identicon';
+export { gradientSvg } from './identity/gradient';
 
 export { CssOrbPresence } from './css-orb/CssOrbPresence';
 export { CSS_ORB_STATES, cssOrbSpeed, toCssOrbState, type CssOrbState } from './css-orb/map';
@@ -159,3 +162,6 @@ export { DEMO_TURN, DEMO_TURN_DURATION, snapshotAt, type TimedEvent } from './co
 
 export { cueForPhase, playCue, playPhaseCue, setCueEnabled } from './cue/play';
 export { RECIPES, type CueName } from './cue/recipes';
+
+export { HypercubePresence } from './hypercube/HypercubePresence';
+export { grayCode, hamming, hypercube, project4to2 } from './hypercube/cube';

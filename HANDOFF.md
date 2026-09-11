@@ -27,7 +27,7 @@ Read the files listed in `.handoff/config.yaml` under `project.readingOrder`.
 
 Canonical tree is `thinking-orbs-mega/` plus sibling `presence/` (bus + painters + PresenceHost). `_new/` is gitignored.
 
-Presence 0.10.0: Pi and Hermes drive PresenceHost. Grokbot brand, ttfx grid verbs, Cuelume cues, identicon, waiting spinner. DAW/demoscene parked in `_later/`.
+Presence 0.11.0: Hypercube thinking skin, googly pupils, name-gradient identity. Pi/Hermes on PresenceHost. Ghost idle hover.
 
 <!-- handoff:state-notes -->
 Pi and Hermes push ConversationEvents into PresenceHost; orb verbs are derived from the snapshot. Remaining `_new/` is WATCH/DEMO/SKIP.
@@ -37,9 +37,8 @@ Pi and Hermes push ConversationEvents into PresenceHost; orb verbs are derived f
 
 <!-- handoff:recent -->
 
-- Closed ORBS-dc948a: Pi and Hermes drive PresenceHost.
-- Harvested grokbot-wall brand, ttfx verbs, Cuelume cues, identicon, waiting spinner.
-- DAW/demoscene parked in `_later/`. Presence tests 77/77.
+- Hypercube tesseract, googly look, name-gradient identity.
+- Presence tests 81/81.
 
 <!-- /handoff:recent -->
 

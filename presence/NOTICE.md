@@ -113,6 +113,24 @@ palette and DOM `bind()` helper were not copied.
 
 **boring-avatars** marble hash (MIT). Name → SVG, no expression axis.
 
+## Hypercube
+
+**hypercube** — https://github.com/gianlucamazza/hypercube  
+MIT © 2026 Gianluca Mazza.
+
+`src/hypercube/` ports the n-cube construction, Gray cycle, plane rotations,
+and a simplified 4D→2D perspective. XR, Schlegel chrome, and the adaptive
+projection cascade were not copied.
+
+## Googly look
+
+**omarchy-googly-eyes** — look-vector + spring pupil (Wayland port of
+Sindre Sorhus's menu-bar googly eyes). Bar chrome was not copied.
+
+## Name gradient
+
+Vercel `avatar` triad-gradient look, without SHA-1 or tinycolor.
+
 ## Waiting spinner
 
 **respinner** wave loader (waiting phase only). Other spinner variants were not copied.

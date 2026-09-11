@@ -33,7 +33,7 @@ Canonical: `thinking-orbs-mega` ModeFrame. Conversation Seam is the dual-channel
 |---|---|---|
 | `orbz-staging` (`@neongate-ai/orbz`) | **EXTRACT** contract + **DEMO** skin | Web Component `<orb-z>`. States `idle/listening/thinking/speaking/asleep`. Six CSS/WAAPI layers (`root, aura, ring, field, core, highlight`) driven from `orbz.config.json`. Not dots — a **layered CSS orb port**. Speech is explicit (`startTalking()`), which matches Seam. MIT. |
 | `codeorb-master` | **SKIP** product | JARVIS-style Three.js **codebase** graph. Wrong subject (repo topology, not agent state). |
-| `hypercube-main` | **WATCH** math | Zero-dep Canvas 2D n-cube, Schlegel, Gray-code comet. We already have a `hypercube` verb; this is a better **contemplative** substrate if we ever want a thinking-as-dimension skin. MIT. |
+| `hypercube-main` | **EXTRACT** | **Landed:** n-cube + Gray comet as `HypercubePresence`. XR/Schlegel chrome skipped. MIT. |
 | `ENTHEA-main` | **SKIP** engine; **DEMO** later | Single-file WebGL2 psychedelic synth, 29 “visionary modes”. Spectacle, AGPL, not a state indicator. |
 | `bloom-main` | **SKIP** for orbs | Trigger→menu morph (button becomes panel). UI chrome, not presence. |
 
@@ -164,6 +164,9 @@ Harvested zip drops live in `_processed/`. DAW and demoscene archives live in `_
 | 16 | Cuelume phase cues | **landed** in `presence/src/cue` |
 | 17 | boring-avatars identicon | **landed** as IdentityPresence `variant="identicon"` |
 | 18 | respinner wave | **landed** on Glyph waiting |
+| 19 | hypercube tesseract | **landed** in `presence/src/hypercube` |
+| 20 | googly look-vector | **landed** in `GooglyPresence` |
+| 21 | vercel avatar gradient | **landed** as IdentityPresence `variant="gradient"` |
 
 Sidecar demos (playable, not engine): hydra backdrop, ENTHEA, audiotype, grokbot-wall ASCII pass.
 
